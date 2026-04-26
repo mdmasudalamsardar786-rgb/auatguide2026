@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AUAT Engineering 2026 — Complete Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--cream:#faf8f4;--warm:#fff9f2;--gold:#b8923a;--gold-l:#e8d5a3;--gold-d:#7a5e1a;--ink:#18140e;--ink-s:#4a3e2e;--ink-l:#9a8a72;--line:#ede8df;--blue:#3d5f7a;--blue-l:#eaf0f6;--green:#3d6b4a;--green-l:#e8f2ec;--purple:#5a3d7a;--purple-l:#f0ebf8;--amber:#7a5a1a;--amber-l:#fdf3e0;--red:#7a3d3d;--red-l:#faeaea;}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);overflow-x:hidden;}
+.hero{min-height:auto;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:48px 20px 44px;background:linear-gradient(160deg,#fff9f0,#faf4e6,#f5eddc);position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:-60px;right:-60px;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(184,146,58,0.1) 0%,transparent 70%);}
+.hero::after{content:'';position:absolute;bottom:-80px;left:-40px;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(184,146,58,0.08) 0%,transparent 70%);}
+.hero-eyebrow{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold-d);border:1px solid var(--gold-l);padding:5px 18px;border-radius:30px;display:inline-block;margin-bottom:22px;background:rgba(255,255,255,0.7);position:relative;}
+.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(38px,6vw,72px);font-weight:300;line-height:1.05;color:var(--ink);position:relative;}
+.hero-title em{font-style:italic;color:var(--gold);}
+.hero-sub{font-family:'Cormorant Garamond',serif;font-size:clamp(17px,2.5vw,24px);font-style:italic;color:var(--ink-s);margin-top:12px;position:relative;}
+.hero-quote{font-size:clamp(13px,1.5vw,15px);color:var(--ink-l);line-height:1.8;max-width:500px;margin:14px auto 0;font-style:italic;position:relative;}
+.stat-row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:32px;position:relative;}
+.stat-box{background:rgba(255,255,255,0.8);border:1px solid var(--gold-l);border-radius:13px;padding:14px 18px;text-align:center;backdrop-filter:blur(8px);min-width:82px;}
+.stat-n{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:600;color:var(--gold-d);line-height:1;}
+.stat-l{font-size:8px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink-l);margin-top:2px;}
+.q-band{background:linear-gradient(135deg,#18140e,#251c0e);padding:44px 20px;text-align:center;position:relative;overflow:hidden;}
+.q-band::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:380px;height:380px;border-radius:50%;background:radial-gradient(circle,rgba(184,146,58,0.07) 0%,transparent 70%);}
+.q-arabic{font-size:clamp(20px,5vw,40px);color:var(--gold);font-family:'Cormorant Garamond',serif;font-weight:300;letter-spacing:3px;position:relative;}
+.q-source{font-size:10px;color:rgba(255,255,255,0.38);letter-spacing:2px;text-transform:uppercase;margin:7px 0 20px;position:relative;}
+.q-main{font-family:'Cormorant Garamond',serif;font-size:clamp(18px,3.5vw,32px);color:white;font-weight:300;line-height:1.35;max-width:640px;margin:0 auto;position:relative;}
+.q-main em{color:var(--gold);font-style:italic;}
+.wrap{max-width:840px;margin:0 auto;padding:64px 20px;}
+.s-eye{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold-d);margin-bottom:9px;display:block;}
+.s-title{font-family:'Cormorant Garamond',serif;font-size:clamp(26px,5vw,42px);font-weight:300;line-height:1.1;}
+.s-title em{font-style:italic;color:var(--gold);}
+.divider{width:48px;height:1px;background:linear-gradient(to right,var(--gold),transparent);margin:12px 0 32px;}
+.exam-dark{background:linear-gradient(135deg,#18140e,#2a1e0a);border-radius:18px;padding:32px;color:white;position:relative;overflow:hidden;margin-bottom:16px;}
+.exam-dark::before{content:'';position:absolute;top:-28px;right:-28px;width:150px;height:150px;border-radius:50%;background:radial-gradient(circle,rgba(184,146,58,0.12) 0%,transparent 70%);}
+.exam-name{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:var(--gold);margin-bottom:3px;}
+.exam-date{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.38);margin-bottom:22px;}
+.part-label{font-size:8px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.32);margin-bottom:9px;}
+.marks-row{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:14px;}
+@media(min-width:480px){.marks-row{grid-template-columns:repeat(4,1fr);}}
+.m-chip{background:rgba(255,255,255,0.05);border:1px solid rgba(184,146,58,0.22);border-radius:10px;padding:12px 8px;text-align:center;}
+.m-chip.hl{background:rgba(184,146,58,0.12);border-color:var(--gold);}
+.m-n{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:600;color:var(--gold);line-height:1;}
+.m-l{font-size:7px;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,0.42);margin-top:2px;}
+.m-chip.hl .m-l{color:var(--gold-l);}
+.target-note{background:var(--amber-l);border:1px solid var(--gold-l);border-radius:12px;padding:16px 20px;}
+.target-note p{font-size:13px;color:var(--ink-s);line-height:1.75;}
+.target-note strong{color:var(--gold-d);}
+.partb-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:16px;}
+.pb-card{background:white;border-radius:11px;padding:14px;border:1px solid var(--line);text-align:center;}
+.pb-n{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;color:var(--gold-d);line-height:1;}
+.pb-l{font-size:8px;letter-spacing:1px;text-transform:uppercase;color:var(--ink-l);margin-top:2px;}
+.pb-tip{font-size:10px;color:var(--ink-s);margin-top:5px;line-height:1.5;}
+.routine-card{background:white;border-radius:14px;padding:24px;border:1px solid var(--line);margin-bottom:11px;}
+.r-day-label{font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--gold-d);font-weight:700;margin-bottom:16px;}
+.tl{display:flex;flex-direction:column;}
+.tl-row{display:grid;grid-template-columns:76px 1fr;position:relative;}
+.tl-row::before{content:'';position:absolute;left:75px;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,var(--gold-l),transparent);}
+.tl-t{padding:12px 10px 12px 0;text-align:right;font-size:9px;font-weight:700;letter-spacing:0.5px;color:var(--gold-d);position:relative;}
+.tl-t::after{content:'';position:absolute;right:-4px;top:18px;width:6px;height:6px;border-radius:50%;background:var(--gold);border:2px solid var(--cream);}
+.tl-b{padding:9px 0 9px 18px;}
+.tl-subj{font-weight:600;font-size:13px;color:var(--ink);margin-bottom:2px;}
+.tl-detail{font-size:10px;color:var(--ink-l);}
+.tl-badge{display:inline-block;font-size:7px;letter-spacing:1px;text-transform:uppercase;padding:2px 7px;border-radius:20px;margin-top:3px;font-weight:700;}
+.bm{background:var(--blue-l);color:var(--blue);}.bp{background:var(--green-l);color:var(--green);}
+.bc{background:var(--purple-l);color:var(--purple);}.bi{background:var(--amber-l);color:var(--amber);}
+.br{background:#f0f0f0;color:#888;}.bt{background:var(--red-l);color:var(--red);}
+.phases{display:flex;flex-direction:column;gap:12px;}
+.phase{border-radius:13px;padding:22px;border:1px solid;position:relative;overflow:hidden;transition:transform 0.25s;}
+.phase:hover{transform:translateY(-3px);}
+.ph1{background:var(--blue-l);border-color:#bcd2e2;}.ph2{background:var(--green-l);border-color:#b8d2c0;}
+.ph3{background:var(--purple-l);border-color:#cac0dc;}.ph4{background:var(--amber-l);border-color:#d8c498;}
+.ph-bg{font-family:'Cormorant Garamond',serif;font-size:56px;font-weight:700;position:absolute;right:14px;top:-4px;opacity:0.07;color:var(--ink);line-height:1;}
+.ph-eye{font-size:7px;letter-spacing:2px;text-transform:uppercase;font-weight:700;margin-bottom:3px;}
+.ph1 .ph-eye{color:var(--blue)}.ph2 .ph-eye{color:var(--green)}.ph3 .ph-eye{color:var(--purple)}.ph4 .ph-eye{color:var(--amber);}
+.ph-name{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;color:var(--ink);margin-bottom:2px;}
+.ph-dates{font-size:9px;color:var(--ink-l);margin-bottom:9px;}
+.ph-list{list-style:none;}
+.ph-list li{font-size:11px;color:var(--ink-s);padding:3px 0;border-bottom:1px solid rgba(0,0,0,0.05);display:flex;gap:6px;}
+.ph-list li::before{content:'—';color:var(--gold);flex-shrink:0;}.ph-list li:last-child{border-bottom:none;}
+.subj-block{margin-bottom:40px;}
+.subj-head{display:flex;align-items:center;gap:11px;margin-bottom:12px;}
+.s-icon{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0;}
+.im{background:var(--blue-l)}.ip{background:var(--green-l)}.ic{background:var(--purple-l)}.ii{background:var(--amber-l)}
+.subj-head h3{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:600;}
+.sh-sub{font-size:8px;color:var(--ink-l);letter-spacing:1px;text-transform:uppercase;}
+.cat-label{font-size:8px;letter-spacing:2px;text-transform:uppercase;font-weight:700;color:var(--gold-d);margin:13px 0 6px;}
+.priority-key{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:12px;}
+.pk-item{display:flex;align-items:center;gap:4px;font-size:9px;color:var(--ink-s);}
+.pk-dot{width:7px;height:7px;border-radius:50%;}
+.topic-grid{display:grid;grid-template-columns:1fr;gap:5px;}
+@media(min-width:520px){.topic-grid{grid-template-columns:1fr 1fr;}}
+.t-card{background:white;border-radius:7px;padding:9px 12px;border:1px solid var(--line);display:flex;gap:7px;align-items:flex-start;transition:box-shadow 0.2s;}
+.t-card:hover{box-shadow:0 3px 10px rgba(0,0,0,0.06);}
+.t-pri{font-size:7px;letter-spacing:0.5px;text-transform:uppercase;font-weight:700;flex-shrink:0;padding-top:2px;min-width:24px;}
+.pri-h{color:var(--red)}.pri-m{color:var(--amber)}.pri-e{color:var(--green)}
+.t-name{font-size:12px;font-weight:600;color:var(--ink);}
+.t-tip{font-size:9px;color:var(--ink-l);margin-top:1px;line-height:1.4;}
+.pyq-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+@media(min-width:460px){.pyq-grid{grid-template-columns:repeat(4,1fr);}}
+.pyq-card{background:white;border:1px solid var(--line);border-radius:11px;padding:14px 8px;text-align:center;text-decoration:none;transition:all 0.2s;display:block;}
+.pyq-card:hover{border-color:var(--gold);box-shadow:0 4px 16px rgba(0,0,0,0.07);transform:translateY(-3px);}
+.pyq-y{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;color:var(--gold-d);line-height:1;}
+.pyq-lbl{font-size:7px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink-l);margin-top:3px;}
+.pyq-soon{background:var(--warm);cursor:default;pointer-events:none;}
+.pyq-soon .pyq-y{color:var(--ink-l);font-size:16px;margin-top:5px;}
+.cd-wrap{background:linear-gradient(135deg,#18140e,#221a08);padding:52px 20px;text-align:center;position:relative;overflow:hidden;}
+.cd-wrap::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,rgba(184,146,58,0.06) 0%,transparent 70%);}
+.cd-eye{font-size:8px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:14px;position:relative;}
+.cd-row{display:flex;gap:9px;justify-content:center;flex-wrap:wrap;position:relative;}
+.cd-box{background:rgba(255,255,255,0.04);border:1px solid rgba(184,146,58,0.18);border-radius:11px;padding:14px 11px;min-width:68px;text-align:center;}
+.cd-n{font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:600;color:var(--gold);line-height:1;}
+.cd-u{font-size:7px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.28);margin-top:2px;}
+.cd-q{font-family:'Cormorant Garamond',serif;font-size:clamp(16px,3vw,26px);color:white;font-weight:300;margin-top:24px;line-height:1.4;position:relative;}
+.cd-q em{color:var(--gold);font-style:italic;}
+.quotes-section{background:var(--warm);padding:56px 20px;}
+.q-list{display:flex;flex-direction:column;gap:11px;max-width:840px;margin:0 auto;}
+.q-item{background:white;border-radius:12px;padding:18px 20px;border:1px solid var(--line);border-left:3px solid var(--gold);}
+.q-text{font-family:'Cormorant Garamond',serif;font-size:clamp(15px,2.5vw,18px);font-style:italic;color:var(--ink-s);line-height:1.6;}
+.q-author{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold-d);margin-top:7px;font-weight:600;}
+.final{padding:72px 20px;text-align:center;background:linear-gradient(160deg,#fff9f0,#faf4e6);}
+.final-bg{font-family:'Cormorant Garamond',serif;font-size:clamp(56px,14vw,130px);font-weight:700;color:var(--ink);opacity:0.04;line-height:1;margin-bottom:-24px;}
+.final-title{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,6vw,56px);font-weight:300;line-height:1.1;margin-bottom:18px;}
+.final-title em{color:var(--gold);font-style:italic;}
+.final-text{font-size:14px;color:var(--ink-s);line-height:1.9;max-width:580px;margin:0 auto 10px;}
+.final-sign{font-family:'Cormorant Garamond',serif;font-size:18px;font-style:italic;color:var(--gold-d);margin-top:28px;}
+.bg-cream{background:var(--cream);}.bg-warm{background:var(--warm);}
+.rv{opacity:0;transform:translateY(22px);transition:opacity 0.6s ease,transform 0.6s ease;}
+.rv.in{opacity:1;transform:translateY(0);}
+
+.sym-float{position:absolute;font-size:clamp(20px,4vw,36px);opacity:0.07;pointer-events:none;}
+50%{transform:translateY(-18px) rotate(8deg);}}
+@keyframes pulse-ring{0%{transform:scale(0.8);opacity:0.6;}100%{transform:scale(1.6);opacity:0;}}
+.pulse-dot{position:relative;display:inline-block;}
+.pulse-dot::before{content:'';position:absolute;inset:-6px;border-radius:50%;background:var(--gold);}
+100%{background-position:200% center;}}
+.shimmer-text{background:linear-gradient(90deg,var(--gold-d) 0%,var(--gold) 40%,#e8c870 60%,var(--gold-d) 100%);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+to{opacity:1;transform:scale(1);}}
+.stat-n{}
+50%{box-shadow:0 0 16px 2px rgba(184,146,58,0.15);}}
+.exam-dark{}
+to{opacity:1;transform:translateX(0);}}
+.tl-badge{}
+</style>
+</head>
+<body>
+
+<!-- TOP QURAN QUOTE -->
+<div style="background:linear-gradient(135deg,#18140e,#251c0e);padding:18px 20px;text-align:center;position:relative;overflow:hidden;">
+  <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(184,146,58,0.06) 0%,transparent 70%);pointer-events:none;"></div>
+  <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(16px,3vw,26px);color:white;font-weight:300;line-height:1.4;position:relative;max-width:700px;margin:0 auto;">
+    "Verily, with every hardship comes <em style="color:#c9a84c;font-style:italic;">ease.</em>"
+    <span style="display:block;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-top:6px;">— Surah Al-Inshirah, 94:6</span>
+  </div>
+</div>
+
+<!-- COUNTDOWN -->
+<div class="cd-wrap" style="padding:28px 20px;">
+  <div class="cd-eye">⏳ Time Remaining Until AUAT 2026</div>
+  <div class="cd-row">
+    <div class="cd-box"><div class="cd-n" id="cd-d">--</div><div class="cd-u">Days</div></div>
+    <div class="cd-box"><div class="cd-n" id="cd-h">--</div><div class="cd-u">Hours</div></div>
+    <div class="cd-box"><div class="cd-n" id="cd-m">--</div><div class="cd-u">Minutes</div></div>
+    <div class="cd-box"><div class="cd-n" id="cd-s">--</div><div class="cd-u">Seconds</div></div>
+  </div>
+</div>
+
+<section class="hero">
+  <!-- Floating symbols -->
+  
+  
+  
+  
+  
+  
+  
+  
+  <span class="hero-eyebrow">AUAT Engineering 2026 · Complete Study Guide</span>
+  <h1 class="hero-title">Crack <em class="shimmer-text">AUAT</em><br>Engineering 2026</h1>
+  <p class="hero-sub">Your Roadmap to Aliah University</p>
+  <p class="hero-quote">"Every expert was once a beginner. The difference is they never stopped."</p>
+  <div class="stat-row">
+    <div class="stat-box"><div class="stat-n" id="days-left">--</div><div class="stat-l">Days Left</div></div>
+    <div class="stat-box"><div class="stat-n">100</div><div class="stat-l">Total Marks</div></div>
+    <div class="stat-box"><div class="stat-n">60+</div><div class="stat-l">Target Score</div></div>
+    <div class="stat-box"><div class="stat-n">8h</div><div class="stat-l">Daily Study</div></div>
+  </div>
+
+  </section>
+</div>
+
+<div class="bg-warm"><div class="wrap rv">
+  <span class="s-eye">The Exam</span>
+  <h2 class="s-title">AUAT <em>Structure</em></h2>
+  <div class="divider"></div>
+  <div class="exam-dark">
+    <div class="exam-name">Aliah University AUAT — Engineering</div>
+    <div class="exam-date">June 27, 2026 · 100 Marks · 2 Hours</div>
+    <div class="part-label">PART A — 70 MARKS</div>
+    <div class="marks-row">
+      <div class="m-chip"><div class="m-n">35</div><div class="m-l">Mathematics</div></div>
+      <div class="m-chip"><div class="m-n">20</div><div class="m-l">Physics</div></div>
+      <div class="m-chip"><div class="m-n">15</div><div class="m-l">Chemistry</div></div>
+      <div class="m-chip" style="opacity:0.9"><div class="m-n" style="font-size:16px;margin-top:5px;">70</div><div class="m-l">Part A Total</div></div>
+    </div>
+    <div class="part-label">PART B — 30 MARKS</div>
+    <div class="marks-row">
+      <div class="m-chip hl"><div class="m-n">20</div><div class="m-l">Islamic Knowledge ⭐</div></div>
+      <div class="m-chip"><div class="m-n">5</div><div class="m-l">English</div></div>
+      <div class="m-chip"><div class="m-n">5</div><div class="m-l">General Knowledge</div></div>
+      <div class="m-chip" style="opacity:0.9"><div class="m-n" style="font-size:16px;margin-top:5px;">30</div><div class="m-l">Part B Total</div></div>
+    </div>
+  </div>
+  <div class="target-note">
+    <p><strong>Target: 60+ marks</strong> for a good branch. Part B alone (Islamic 20 + English 5 + GK 5) gives you <strong>30 marks easily.</strong> In Math, target just <strong>7+ out of 35</strong> — that is enough. Physics & Chemistry are bonus. 30 + 7 + extras = 60+ secured.</p>
+  </div>
+</div></div>
+
+<div class="bg-cream"><div class="wrap rv">
+  <span class="s-eye">Every Single Day</span>
+  <h2 class="s-title">Daily <em>Routine</em></h2>
+  <div class="divider"></div>
+  <div class="routine-card">
+    <div class="r-day-label">Daily Self Study Plan (Excluding Class Time)</div>
+    <div style="display:flex;flex-direction:column;gap:12px;">
+      <div style="display:flex;align-items:center;gap:14px;padding:14px 16px;background:var(--blue-l);border-radius:10px;border:1px solid #c8dcea;">
+        <div style="font-size:28px;">📐</div>
+        <div><div style="font-weight:700;font-size:15px;color:var(--ink);">Mathematics</div><div style="font-size:12px;color:var(--ink-l);margin-top:2px;">4 hours daily — Most important, highest marks</div></div>
+        <div style="margin-left:auto;font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:700;color:var(--blue);">4h</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:14px;padding:14px 16px;background:var(--purple-l);border-radius:10px;border:1px solid #ccc0e0;">
+        <div style="font-size:28px;">⚗️</div>
+        <div><div style="font-weight:700;font-size:15px;color:var(--ink);">Chemistry</div><div style="font-size:12px;color:var(--ink-l);margin-top:2px;">2 hours daily — Follow chapter priority list</div></div>
+        <div style="margin-left:auto;font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:700;color:var(--purple);">2h</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:14px;padding:14px 16px;background:var(--green-l);border-radius:10px;border:1px solid #bcd4c4;">
+        <div style="font-size:28px;">⚡</div>
+        <div><div style="font-weight:700;font-size:15px;color:var(--ink);">Physics</div><div style="font-size:12px;color:var(--ink-l);margin-top:2px;">2 hours daily — Most important chapters first</div></div>
+        <div style="margin-left:auto;font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:700;color:var(--green);">2h</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:14px;padding:14px 16px;background:var(--amber-l);border-radius:10px;border:1px solid #d8c498;">
+        <div style="font-size:28px;">🕌</div>
+        <div><div style="font-weight:700;font-size:15px;color:var(--ink);">Islamic + GK + English</div><div style="font-size:12px;color:var(--ink-l);margin-top:2px;">Daily — Part B is your secret weapon (30 marks)</div></div>
+        <div style="margin-left:auto;font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:700;color:var(--amber);">1h</div>
+      </div>
+    </div>
+    <div style="margin-top:14px;background:#f8f6f2;border-radius:9px;padding:11px 14px;font-size:11px;color:var(--ink-l);text-align:center;letter-spacing:0.5px;">
+      Total: <strong style="color:var(--ink);">8 hours self study per day</strong> · Sunday = Full Revision Day
+    </div>
+  </div>
+  <div style="background:var(--amber-l);border:1px solid var(--gold-l);border-radius:12px;padding:16px 20px;">
+    <div style="font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--gold-d);font-weight:700;margin-bottom:7px;">Sunday — Revision Day</div>
+    <p style="font-size:12px;color:var(--ink-s);line-height:1.8;">No new topics on Sunday. Review entire week's notes 7–11 AM. Attempt one full mock test in the evening. Fix your weak points.</p>
+  </div>
+</div></div>
+
+<div class="bg-warm"><div class="wrap rv">
+  <span class="s-eye">Chapter by Chapter</span>
+  <h2 class="s-title">Subject <em>Topics</em></h2>
+  <div class="divider"></div>
+
+  <!-- MATH -->
+  <div class="subj-block">
+    <div class="subj-head"><div class="s-icon im">📐</div><div><h3>Mathematics</h3><div class="sh-sub">35 Marks · 4 Hours Daily · Most Important</div></div></div>
+    <div class="priority-key">
+      <div class="pk-item"><div class="pk-dot" style="background:#7a3d3d;"></div>High Priority</div>
+      <div class="pk-item"><div class="pk-dot" style="background:#7a5a1a;"></div>Medium Priority</div>
+      <div class="pk-item"><div class="pk-dot" style="background:#3d6b4a;"></div>Easy / Direct</div>
+    </div>
+    <div class="cat-label">Category 1 — Calculus (Highest Marks Area)</div>
+    <div class="topic-grid">
+      <div class="t-card"><div class="t-pri pri-h">HIGH</div><div><div class="t-name">Definite Integration</div><div class="t-tip">Properties, special integrals, area under curve</div></div></div>
+      <div class="t-card"><div class="t-pri pri-h">HIGH</div><div><div class="t-name">Application of Derivatives</div><div class="t-tip">Rate of change, tangent & normal</div></div></div>
+      <div class="t-card"><div class="t-pri pri-h">HIGH</div><div><div class="t-name">Maxima & Minima</div><div class="t-tip">First & second derivative test, word problems</div></div></div>
+      <div class="t-card"><div class="t-pri pri-h">HIGH</div><div><div class="t-name">Limits</div><div class="t-tip">L'Hôpital rule, standard limits, continuity</div></div></div>
+    </div>
+    <div class="cat-label">Category 2 — Algebra</div>
+    <div class="topic-grid">
+      <div class="t-card"><div class="t-pri pri-h">HIGH</div><div><div class="t-name">Matrix & Determinants</div><div class="t-tip">Operations, inverse, Cramer's rule</div></div></div>
+      <div class="t-card"><div class="t-pri pri-h">HIGH</div><div><div class="t-name">Probability</div><div class="t-tip">Bayes theorem, conditional, distributions</div></div></div>
+      <div class="t-card"><div class="t-pri pri-m">MED</div><div><div class="t-name">Complex Numbers</div><div class="t-tip">Argand plane, modulus, De Moivre</div></div></div>
+    </div>
+    <div class="cat-label">Category 3 — Vectors & 3D Geometry (Easy Scoring)</div>
+    <div class="topic-grid">
+      <div class="t-card"><div class="t-pri pri-e">EASY</div><div><div class="t-name">Dot & Cross Product</div><div class="t-tip">Direct questions, angle between vectors</div></div></div>
+      <div class="t-card"><div class="t-pri pri-e">EASY</div><div><div class="t-name">3D Geometry</div><div class="t-tip">Direction cosines, lines & planes in space</div></div></div>
+    </div>
+    <div class="cat-label">Category 4 — Coordinate Geometry</div>
+    <div class="topic-grid">
+      <div class="t-card"><div class="t-pri pri-h">HIGH</div><div><div class="t-name">Straight Line</div><div class="t-tip">Slope, intercepts, distance, angle between lines</div></div></div>
+      <div class="t-card"><div class="t-pri pri-h">HIGH</div><div><div class="t-name">Circle</div><div class="t-tip">Equation, tangent, normal — memorize standard forms</div></div></div>
+      <div class="t-card"><div class="t-pri pri-m">MED</div><div><div class="t-name">Parabola</div><div class="t-tip">Standard forms, tangents & normals</div></div></div>
+    </div>
+    <div class="cat-label">Category 5 — Trigonometry</div>
+    <div class="topic-grid">
+      <div class="t-card"><div class="t-pri pri-h">HIGH</div><div><div class="t-name">Inverse Trigonometric Functions</div><div class="t-tip">Principal values, properties, composition</div></div></div>
+      <div class="t-card"><div class="t-pri pri-m">MED</div><div><div class="t-name">Trigonometric Equations</div><div class="t-tip">General solutions, specific solutions</div></div></div>
+    </div>
+    <div class="cat-label">Category 6 — Small but Sure Marks</div>
+    <div class="topic-grid">
+      <div class="t-card"><div class="t-pri pri-e">EASY</div><div><div class="t-name">Sets</div><div class="t-tip">Union, intersection, Venn diagrams</div></div></div>
+      <div class="t-card"><div class="t-pri pri-e">EASY</div><div><div class="t-name">Relations & Mapping</div><div class="t-tip">Domain, range, types of functions, bijection</div></div></div>
+    </div>
+  </div>
+
+  <!-- PHYSICS -->
+  <div class="subj-block">
+    <div class="subj-head"><div class="s-icon ip">⚡</div><div><h3>Physics</h3><div class="sh-sub">20 Marks · 2 Hours Daily</div></div></div>
+    <div class="cat-label">Most Important Chapters</div>
+    <div class="topic-grid">
+      <div class="t-card"><div class="t-pri pri-h">HIGH</div><div><div class="t-name">Units & Measurement</div><div class="t-tip">SI units, dimensional analysis, error</div></div></div>
+      <div class="t-card"><div class="t-pri pri-h">HIGH</div><div><div class="t-name">Rotational Motion</div><div class="t-tip">Moment of inertia, torque, angular momentum</div></div></div>
+      <div class="t-card"><div class="t-pri pri-h">HIGH</div><div><div class="t-name">Fluids</div><div class="t-tip">Bernoulli, Pascal, viscosity, surface tension</div></div></div>
+      <div class="t-card"><div class="t-pri pri-h">HIGH</div><div><div class="t-name">Thermodynamics</div><div class="t-tip">Laws, processes, heat engines, entropy</div></div></div>
+      <div class="t-card"><div class="t-pri pri-h">HIGH</div><div><div class="t-name">Kinetic Theory of Gases</div><div class="t-tip">RMS speed, pressure, degrees of freedom</div></div></div>
+      <div class="t-card"><div class="t-pri pri-h">HIGH</div><div><div class="t-name">Oscillations (SHM)</div><div class="t-tip">Time period, energy, pendulum</div></div></div>
+      <div class="t-card"><div class="t-pri pri-h">HIGH</div><div><div class="t-name">Waves</div><div class="t-tip">Speed, superposition, beats, Doppler</div></div></div>
+    </div>
+    <div class="cat-label">Medium Important Chapters</div>
+    <div class="topic-grid">
+      <div class="t-card"><div class="t-pri pri-m">MED</div><div><div class="t-name">Kinematics (1D & 2D)</div><div class="t-tip">Equations of motion, projectile, relative</div></div></div>
+      <div class="t-card"><div class="t-pri pri-m">MED</div><div><div class="t-name">Laws of Motion</div><div class="t-tip">Newton's laws, friction, circular motion</div></div></div>
+      <div class="t-card"><div class="t-pri pri-m">MED</div><div><div class="t-name">Work, Energy & Power</div><div class="t-tip">KE, PE, conservation, collisions</div></div></div>
+      <div class="t-card"><div class="t-pri pri-m">MED</div><div><div class="t-name">Gravitation</div><div class="t-tip">Kepler's laws, orbital & escape velocity</div></div></div>
+      <div class="t-card"><div class="t-pri pri-m">MED</div><div><div class="t-name">Elasticity (Solids)</div><div class="t-tip">Stress, strain, Young's modulus</div></div></div>
+    </div>
+    <div style="background:var(--blue-l);border-radius:9px;padding:12px 14px;margin-top:8px;font-size:11px;color:var(--blue);">
+      <strong>Question Pattern:</strong> 25% Easy · 50% Moderate · 25% Tough. Master easy + moderate = 75% of Physics marks.
+    </div>
+  </div>
+
+  <!-- CHEMISTRY -->
+  <div class="subj-block">
+    <div class="subj-head"><div class="s-icon ic">⚗️</div><div><h3>Chemistry</h3><div class="sh-sub">15 Marks · 2 Hours Daily</div></div></div>
+    <div class="topic-grid">
+      <div class="t-card"><div class="t-pri pri-h">HIGH</div><div><div class="t-name">General Organic Chemistry</div><div class="t-tip">Inductive, resonance, hyperconjugation effects</div></div></div>
+      <div class="t-card"><div class="t-pri pri-h">HIGH</div><div><div class="t-name">Aldehydes, Ketones & Carboxylic Acids</div><div class="t-tip">Reactions, nucleophilic addition, oxidation</div></div></div>
+      <div class="t-card"><div class="t-pri pri-h">HIGH</div><div><div class="t-name">Chemical Bonding & Molecular Structure</div><div class="t-tip">VSEPR, hybridization, bond properties</div></div></div>
+      <div class="t-card"><div class="t-pri pri-h">HIGH</div><div><div class="t-name">p-Block Elements</div><div class="t-tip">Properties, reactions, important compounds</div></div></div>
+      <div class="t-card"><div class="t-pri pri-h">HIGH</div><div><div class="t-name">Electrochemistry</div><div class="t-tip">Nernst equation, EMF, electrolysis</div></div></div>
+      <div class="t-card"><div class="t-pri pri-m">MED</div><div><div class="t-name">Chemical Kinetics</div><div class="t-tip">Rate laws, order of reaction, Arrhenius</div></div></div>
+      <div class="t-card"><div class="t-pri pri-m">MED</div><div><div class="t-name">Coordination Compounds</div><div class="t-tip">IUPAC, isomerism, crystal field theory</div></div></div>
+      <div class="t-card"><div class="t-pri pri-m">MED</div><div><div class="t-name">Thermodynamics (Chem)</div><div class="t-tip">ΔH, ΔG, ΔS, spontaneity, Hess's law</div></div></div>
+      <div class="t-card"><div class="t-pri pri-m">MED</div><div><div class="t-name">Alcohols, Phenols & Ethers</div><div class="t-tip">Reactions, preparation, acidic strength</div></div></div>
+      <div class="t-card"><div class="t-pri pri-e">EASY</div><div><div class="t-name">Solutions</div><div class="t-tip">Colligative properties, molarity, osmosis</div></div></div>
+    </div>
+  </div>
+
+  <!-- ISLAMIC KNOWLEDGE -->
+  <div class="subj-block">
+    <div class="subj-head"><div class="s-icon ii">🕌</div><div><h3>Islamic Knowledge</h3><div class="sh-sub">20 Marks ⭐ · Strongest Weapon — Part B</div></div></div>
+    <div class="topic-grid">
+      <div class="t-card"><div class="t-pri pri-h">HIGH</div><div><div class="t-name">Quran — Major Surahs & Tafsir</div><div class="t-tip">Names, revelation order, basic meanings</div></div></div>
+      <div class="t-card"><div class="t-pri pri-h">HIGH</div><div><div class="t-name">Hadith Collections</div><div class="t-tip">Bukhari, Muslim — famous hadiths & narrators</div></div></div>
+      <div class="t-card"><div class="t-pri pri-h">HIGH</div><div><div class="t-name">Fiqh — Pillars of Islam</div><div class="t-tip">Salah, Zakah, Sawm, Hajj in detail</div></div></div>
+      <div class="t-card"><div class="t-pri pri-h">HIGH</div><div><div class="t-name">Islamic History</div><div class="t-tip">Prophet ﷺ life, Khulafa-e-Rashideen, battles</div></div></div>
+      <div class="t-card"><div class="t-pri pri-m">MED</div><div><div class="t-name">Aqeedah — Pillars of Faith</div><div class="t-tip">Iman, Tawheed, Angels, Prophets, Qadar</div></div></div>
+      <div class="t-card"><div class="t-pri pri-e">EASY</div><div><div class="t-name">Islamic Ethics & Akhlaq</div><div class="t-tip">Social responsibilities, moral values</div></div></div>
+    </div>
+  </div>
+
+  <!-- PART B OTHERS -->
+  <div class="subj-block">
+    <div class="subj-head"><div class="s-icon" style="background:#e8f0f8;font-size:19px;">📝</div><div><h3>English & General Knowledge</h3><div class="sh-sub">5 + 5 = 10 Marks · Part B</div></div></div>
+    <div class="partb-grid">
+      <div class="pb-card"><div class="pb-n">5</div><div class="pb-l">English</div><div class="pb-tip">Grammar basics, comprehension, vocabulary</div></div>
+      <div class="pb-card"><div class="pb-n">5</div><div class="pb-l">General Knowledge</div><div class="pb-tip">Current affairs, India & WB news daily</div></div>
+      <div class="pb-card" style="background:var(--amber-l);border-color:var(--gold-l);"><div class="pb-n" style="color:var(--gold-d);">10</div><div class="pb-l">Easy Marks</div><div class="pb-tip">Achievable with 20 min daily reading</div></div>
+    </div>
+  </div>
+
+</div></div>
+
+<!-- PYQ -->
+<div class="bg-cream"><div class="wrap rv">
+  <span class="s-eye">Practice Makes Perfect</span>
+  <h2 class="s-title">Previous Year <em>Papers</em></h2>
+  <div class="divider"></div>
+  <p style="font-size:12px;color:var(--ink-l);margin-bottom:16px;">Click to download. Solving PYQs is the fastest way to understand the exam pattern.</p>
+  <div class="pyq-grid">
+    <a class="pyq-card" href="auat-2019.pdf" target="_blank"><div class="pyq-y">2019</div><div class="pyq-lbl">Download PDF</div></a>
+    <a class="pyq-card" href="auat-2020.pdf" target="_blank"><div class="pyq-y">2020</div><div class="pyq-lbl">Download PDF</div></a>
+    <a class="pyq-card" href="auat-2021.pdf" target="_blank"><div class="pyq-y">2021</div><div class="pyq-lbl">Download PDF</div></a>
+    <a class="pyq-card" href="auat-2022.pdf" target="_blank"><div class="pyq-y">2022</div><div class="pyq-lbl">Download PDF</div></a>
+    <a class="pyq-card" href="auat-2023.pdf" target="_blank"><div class="pyq-y">2023</div><div class="pyq-lbl">Download PDF</div></a>
+    <a class="pyq-card" href="auat-2024.pdf" target="_blank"><div class="pyq-y">2024</div><div class="pyq-lbl">Download PDF</div></a>
+    <a class="pyq-card" href="auat-2025.pdf" target="_blank"><div class="pyq-y">2025</div><div class="pyq-lbl">Download PDF</div></a>
+  </div>
+</div></div>
+
+<!-- QUOTES -->
+<div class="quotes-section">
+  <div style="max-width:840px;margin:0 auto;">
+    <div class="wrap rv" style="padding-bottom:0;"><span class="s-eye">Stay Motivated</span><h2 class="s-title">Words That <em>Fuel You</em></h2><div class="divider"></div></div>
+    <div class="q-list rv">
+      <div class="q-item"><div class="q-text">"Success is not final, failure is not fatal — it is the courage to continue that counts."</div><div class="q-author">— Winston Churchill</div></div>
+      <div class="q-item"><div class="q-text">"The secret of getting ahead is getting started. Break your overwhelming tasks into small manageable steps."</div><div class="q-author">— Mark Twain</div></div>
+      <div class="q-item"><div class="q-text">"Don't watch the clock; do what it does. Keep going."</div><div class="q-author">— Sam Levenson</div></div>
+      <div class="q-item"><div class="q-text">"It always seems impossible until it's done."</div><div class="q-author">— Nelson Mandela</div></div>
+      <div class="q-item"><div class="q-text">"Whoever travels a path seeking knowledge, Allah will make easy for him the path to Paradise."</div><div class="q-author">— Prophet Muhammad ﷺ (Sahih Muslim)</div></div>
+      <div class="q-item"><div class="q-text">"Every mark you score, every chapter you finish — it compounds. Trust the process."</div><div class="q-author">— Study Wisdom</div></div>
+      <div class="q-item"><div class="q-text">"Hardship is temporary. The degree you earn lasts a lifetime. Push through."</div><div class="q-author">— Every Successful Student</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- FINAL -->
+<section class="final">
+  <div class="final-bg">BELIEVE</div>
+  <div class="rv">
+    <span class="s-eye" style="display:block;text-align:center;">A Final Word</span>
+    <h2 class="final-title">You Can <em>Do This.</em></h2>
+    <p class="final-text">AUAT is not impossible. With the right plan, consistent effort, and faith in Allah — this exam can be cracked. Islamic Knowledge alone gives you 20 marks. Add strong Math and you are already at 55+.</p>
+    <p class="final-text">Every day you study is a day others are not. Every chapter you finish is one less obstacle between you and your engineering seat at Aliah University.</p>
+    <p class="final-text"><strong>Start today. Not tomorrow. Today.</strong></p>
+    <div class="final-sign">— AUAT 2026 Complete Guide · All the best.</div>
+    <div style="margin-top:32px;padding-top:24px;border-top:1px solid var(--line);font-size:11px;color:var(--ink-l);">
+      Created & Developed by <a href="https://mmalam.in" target="_blank" style="color:var(--gold-d);font-weight:600;text-decoration:none;">Md Masud Alam Sardar</a>
+    </div>
+  </div>
+</section>
+
+<!-- FLOATING PARTICLES -->
+
+<script>
+
+// Countdown
+function tick(){
+  const t=new Date('2026-06-27T00:00:00')-new Date();
+  if(t<=0)return;
+  const d=Math.floor(t/864e5);
+  const h=Math.floor((t%864e5)/36e5);
+  const m=Math.floor((t%36e5)/6e4);
+  const s=Math.floor((t%6e4)/1e3);
+  document.getElementById('cd-d').textContent=d;
+  document.getElementById('cd-h').textContent=String(h).padStart(2,'00');
+  document.getElementById('cd-m').textContent=String(m).padStart(2,'00');
+  document.getElementById('cd-s').textContent=String(s).padStart(2,'00');
+  document.getElementById('days-left').textContent=d;
+}
+setInterval(tick,1000);tick();
+// Scroll reveal
+
+const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('in');});},{threshold:0.08});
+document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
