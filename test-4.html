@@ -1,0 +1,1267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AUAT Test Series 2026 — Part B</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#faf8f4;--warm:#fff9f2;--gold:#b8923a;--gold-l:#e8d5a3;--gold-d:#7a5e1a;
+  --ink:#18140e;--ink-s:#4a3e2e;--ink-l:#9a8a72;--line:#ede8df;
+  --green:#2d6e4a;--green-l:#e8f2ec;--red:#8b2e2e;--red-l:#faeaea;
+  --blue:#3d5f7a;--blue-l:#eaf0f6;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);min-height:100vh;}
+
+/* ---- HOME STICKY HEADER ---- */
+.site-header{
+  background:linear-gradient(135deg,#18140e,#2a1e0a);
+  padding:14px 20px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:sticky;top:0;z-index:200;
+  box-shadow:0 2px 12px rgba(0,0,0,0.3);
+}
+.site-header h1{font-family:'Cormorant Garamond',serif;font-size:clamp(16px,4vw,22px);color:var(--gold);font-weight:300;}
+.back-btn{background:rgba(255,255,255,0.1);border:1px solid rgba(184,146,58,0.3);color:white;padding:7px 14px;border-radius:20px;font-size:12px;cursor:pointer;text-decoration:none;font-family:'DM Sans',sans-serif;}
+.back-btn:hover{background:rgba(255,255,255,0.18);}
+
+.home-hero{background:linear-gradient(160deg,#fff9f0,#faf4e6);padding:36px 20px 28px;text-align:center;}
+.home-hero h2{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,6vw,52px);font-weight:300;color:var(--ink);margin-bottom:10px;}
+.home-hero h2 em{color:var(--gold);font-style:italic;}
+.home-hero p{font-size:14px;color:var(--ink-l);max-width:500px;margin:0 auto 22px;}
+.info-chips{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;}
+.chip{background:white;border:1px solid var(--gold-l);border-radius:20px;padding:6px 14px;font-size:11px;color:var(--ink-s);font-weight:500;}
+
+.test-grid-wrap{max-width:860px;margin:0 auto;padding:32px 20px;}
+.grid-title{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold-d);margin-bottom:16px;}
+.test-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;}
+.test-card{background:white;border:1px solid var(--line);border-radius:14px;padding:20px 16px;cursor:pointer;transition:all 0.22s;text-align:center;position:relative;overflow:hidden;}
+.test-card:hover{border-color:var(--gold);box-shadow:0 4px 20px rgba(184,146,58,0.15);transform:translateY(-3px);}
+.test-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(to right,var(--gold),var(--gold-d));}
+.tc-num{font-family:'Cormorant Garamond',serif;font-size:40px;font-weight:600;color:var(--gold-d);line-height:1;}
+.tc-label{font-size:10px;color:var(--ink-l);letter-spacing:1px;text-transform:uppercase;margin-top:2px;}
+.tc-marks{font-size:12px;color:var(--ink-s);margin-top:8px;font-weight:500;}
+.tc-badge{display:inline-block;font-size:9px;letter-spacing:1px;text-transform:uppercase;padding:3px 10px;border-radius:12px;margin-top:6px;font-weight:600;background:var(--green-l);color:var(--green);}
+
+.rules-box{max-width:860px;margin:0 auto 28px;padding:0 20px;}
+.rules-inner{background:var(--warm);border:1px solid var(--gold-l);border-radius:14px;padding:18px 22px;}
+.rules-title{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold-d);font-weight:700;margin-bottom:12px;}
+.rules-list{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+@media(max-width:480px){.rules-list{grid-template-columns:1fr;}}
+.rule-item{display:flex;align-items:flex-start;gap:8px;font-size:12px;color:var(--ink-s);line-height:1.5;}
+.rule-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);flex-shrink:0;margin-top:5px;}
+
+/* ---- STICKY TEST HEADER ---- */
+.sticky-test-top{position:sticky;top:0;z-index:100;background:linear-gradient(135deg,#18140e,#2a1e0a);box-shadow:0 2px 12px rgba(0,0,0,0.3);}
+.test-header-row{padding:11px 16px;display:flex;align-items:center;justify-content:space-between;gap:10px;}
+.test-title{font-family:'Cormorant Garamond',serif;font-size:17px;color:var(--gold);font-weight:300;}
+.timer-box{background:rgba(184,146,58,0.15);border:1px solid rgba(184,146,58,0.4);border-radius:10px;padding:5px 14px;text-align:center;min-width:78px;}
+.timer-num{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--gold);font-weight:600;line-height:1;}
+.timer-label{font-size:7px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.4);}
+.timer-box.warning{border-color:#e05050;background:rgba(224,80,80,0.15);}
+.timer-box.warning .timer-num{color:#e05050;}
+.progress-bar-wrap{background:#3a2e1a;height:3px;}
+.progress-bar{height:3px;background:linear-gradient(to right,var(--gold),var(--gold-d));transition:width 0.3s;}
+.subj-tabs{display:flex;background:var(--warm);border-bottom:2px solid var(--line);}
+.subj-tab{flex:1;padding:11px 4px;text-align:center;font-size:11px;font-weight:600;color:var(--ink-l);cursor:pointer;border-bottom:3px solid transparent;transition:all 0.2s;margin-bottom:-2px;}
+.subj-tab.active{color:var(--gold-d);border-bottom-color:var(--gold);background:rgba(184,146,58,0.05);}
+.subj-tab.done{color:var(--green);}
+
+/* ---- QUESTIONS ---- */
+.questions-wrap{max-width:720px;margin:0 auto;padding:20px 16px 110px;}
+.q-section{display:none;}
+.q-section.active{display:block;}
+.section-header{background:white;border:1px solid var(--line);border-radius:12px;padding:14px 18px;margin-bottom:18px;display:flex;justify-content:space-between;align-items:center;}
+.section-name{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;color:var(--ink);}
+.section-marks{font-size:11px;color:var(--ink-l);}
+.q-card{background:white;border:1px solid var(--line);border-radius:12px;padding:18px;margin-bottom:12px;transition:border-color 0.2s;}
+.q-card.answered{border-color:var(--gold-l);}
+.q-num{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink-l);margin-bottom:8px;font-weight:600;}
+.q-text{font-size:14px;color:var(--ink);line-height:1.6;margin-bottom:14px;font-weight:500;}
+.options{display:flex;flex-direction:column;gap:8px;}
+.option{display:flex;align-items:center;gap:10px;padding:10px 14px;border:1.5px solid var(--line);border-radius:8px;cursor:pointer;transition:all 0.18s;font-size:13px;color:var(--ink-s);}
+.option:hover{border-color:var(--gold-l);background:var(--warm);}
+.option.selected{border-color:var(--gold);background:rgba(184,146,58,0.06);color:var(--ink);}
+.option.correct{border-color:var(--green);background:var(--green-l);color:var(--green);}
+.option.wrong{border-color:var(--red);background:var(--red-l);color:var(--red);}
+.opt-letter{width:24px;height:24px;border-radius:50%;background:var(--cream);border:1.5px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;transition:all 0.18s;}
+.option.selected .opt-letter{background:var(--gold);border-color:var(--gold);color:white;}
+.option.correct .opt-letter{background:var(--green);border-color:var(--green);color:white;}
+.option.wrong .opt-letter{background:var(--red);border-color:var(--red);color:white;}
+
+/* ---- STICKY BOTTOM (4 items) ---- */
+.sticky-bottom{
+  position:fixed;bottom:0;left:0;right:0;
+  background:white;border-top:1px solid var(--line);
+  padding:10px 10px;
+  display:grid;grid-template-columns:auto 1fr auto auto;
+  align-items:center;gap:8px;
+  z-index:100;box-shadow:0 -4px 16px rgba(0,0,0,0.08);
+}
+.answered-count{font-size:10px;color:var(--ink-l);text-align:center;line-height:1.4;}
+.btn{padding:10px 14px;border-radius:9px;border:none;font-size:12px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s;white-space:nowrap;}
+.btn-exit{background:white;border:1.5px solid #e0d8cc;color:var(--ink-s);}
+.btn-prev{background:linear-gradient(135deg,#4a3e2e,#2e2418);color:rgba(255,255,255,0.85);}
+.btn-prev:disabled{opacity:0.25;cursor:default;}
+.btn-next{background:linear-gradient(135deg,#3d5f7a,#2a3f52);color:white;}
+.btn-submit{background:linear-gradient(135deg,#b8923a,#7a5e1a);color:white;}
+
+/* ---- MODAL ---- */
+.modal-overlay{
+  display:none;position:fixed;inset:0;z-index:300;
+  background:rgba(0,0,0,0.6);backdrop-filter:blur(6px);
+  align-items:center;justify-content:center;padding:24px;
+}
+.modal-overlay.open{display:flex;}
+.modal-box{
+  background:white;border-radius:22px;padding:30px 22px;
+  max-width:340px;width:100%;text-align:center;
+  box-shadow:0 24px 64px rgba(0,0,0,0.25);
+  animation:mIn 0.26s ease;
+}
+@keyframes mIn{from{transform:scale(0.9);opacity:0;}to{transform:scale(1);opacity:1;}}
+.m-icon{font-size:38px;margin-bottom:10px;}
+.m-title{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;color:var(--ink);margin-bottom:3px;}
+.m-sub{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold-d);margin-bottom:16px;}
+.m-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:16px;}
+.ms-item{background:var(--cream);border-radius:10px;padding:10px 4px;}
+.ms-n{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;color:var(--gold-d);}
+.ms-l{font-size:8px;letter-spacing:1px;text-transform:uppercase;color:var(--ink-l);margin-top:2px;}
+.m-rule{font-size:11px;color:var(--ink-s);background:var(--warm);border-radius:8px;padding:9px 12px;margin-bottom:20px;line-height:1.7;text-align:left;}
+.m-btns{display:flex;gap:10px;}
+.m-btns .btn{flex:1;padding:13px;font-size:13px;}
+
+/* ---- RESULT ---- */
+.result-wrap{max-width:680px;margin:0 auto;padding:28px 16px;}
+.result-card{background:linear-gradient(135deg,#18140e,#2a1e0a);border-radius:20px;padding:32px;text-align:center;margin-bottom:22px;}
+.result-title{font-family:'Cormorant Garamond',serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:6px;}
+.result-score{font-family:'Cormorant Garamond',serif;font-size:72px;font-weight:600;color:var(--gold);line-height:1;}
+.result-total{font-size:13px;color:rgba(255,255,255,0.35);margin-top:4px;}
+.result-msg{font-family:'Cormorant Garamond',serif;font-size:20px;font-style:italic;color:white;margin-top:14px;}
+.result-breakdown{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px;}
+.rb-item{background:rgba(255,255,255,0.06);border:1px solid rgba(184,146,58,0.2);border-radius:10px;padding:12px 8px;}
+.rb-num{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;color:var(--gold);line-height:1;}
+.rb-label{font-size:8px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-top:3px;}
+.detail-section{background:white;border-radius:14px;padding:18px;border:1px solid var(--line);margin-bottom:12px;}
+.detail-title{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold-d);font-weight:700;margin-bottom:12px;}
+.detail-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--line);font-size:13px;}
+.detail-row:last-child{border-bottom:none;}
+.detail-subj{color:var(--ink-s);}
+.detail-nums{display:flex;gap:14px;}
+.dn-c{color:var(--green);font-weight:600;}
+.dn-w{color:var(--red);font-weight:600;}
+.dn-s{color:var(--gold-d);font-weight:600;}
+.result-btns{display:flex;gap:10px;flex-wrap:wrap;}
+.result-btns .btn{flex:1;min-width:140px;text-align:center;padding:13px;}
+.score-bar-wrap{margin-top:10px;}
+.score-bar-label{display:flex;justify-content:space-between;font-size:11px;color:var(--ink-l);margin-bottom:4px;}
+.score-bar-bg{background:#e8e0d4;border-radius:10px;height:8px;overflow:hidden;}
+.score-bar-fill{height:8px;border-radius:10px;background:linear-gradient(to right,var(--gold),var(--gold-d));transition:width 1s ease;}
+.review-note{background:var(--blue-l);border:1px solid #bcd4e8;border-radius:8px;padding:10px 14px;font-size:11px;color:var(--blue);margin-bottom:12px;}
+.answer-key{font-size:11px;padding:6px 10px;border-radius:6px;margin-top:6px;font-weight:600;}
+.ak-correct{background:var(--green-l);color:var(--green);}
+.ak-wrong{background:var(--red-l);color:var(--red);}
+</style>
+</head>
+<body>
+
+<!-- ===== HOME ===== -->
+<div class="home-page" id="homePage">
+  <div class="site-header">
+    <h1>✦ AUAT Test Series 2026</h1>
+    <a href="index.html" class="back-btn">← Back to Guide</a>
+  </div>
+  <div class="home-hero">
+    <h2>Part B <em>Test Series</em></h2>
+    <p>Practice tests for Islamic History & Culture, General English, and General Knowledge. Each test is 30 marks with negative marking.</p>
+    <div class="info-chips">
+      <span class="chip">📋 30 Marks per Test</span>
+      <span class="chip">⏱ 30 Minutes</span>
+      <span class="chip">➖ Negative Marking</span>
+      <span class="chip">🕌 Islamic 20 · English 5 · GK 5</span>
+    </div>
+  </div>
+  <div class="rules-box">
+    <div class="rules-inner">
+      <div class="rules-title">Rules & Instructions</div>
+      <div class="rules-list">
+        <div class="rule-item"><div class="rule-dot"></div><span>Each test has 30 MCQ questions — 30 marks total</span></div>
+        <div class="rule-item"><div class="rule-dot"></div><span>Islamic History & Culture: 20 questions (20 marks)</span></div>
+        <div class="rule-item"><div class="rule-dot"></div><span>General English: 5 questions (5 marks)</span></div>
+        <div class="rule-item"><div class="rule-dot"></div><span>General Knowledge: 5 questions (5 marks)</span></div>
+        <div class="rule-item"><div class="rule-dot"></div><span>Negative marking: Every 4 wrong = −1 mark</span></div>
+        <div class="rule-item"><div class="rule-dot"></div><span>Time limit: 30 minutes per test</span></div>
+        <div class="rule-item"><div class="rule-dot"></div><span>Review all answers after submission</span></div>
+        <div class="rule-item"><div class="rule-dot"></div><span>Target: 20+ out of 30 in each test</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="test-grid-wrap">
+    <div class="grid-title">Available Tests</div>
+    <div class="test-grid" id="testGrid"></div>
+  </div>
+</div>
+
+<!-- ===== TEST PAGE ===== -->
+<div style="display:none;" id="testPage">
+  <div class="sticky-test-top">
+    <div class="test-header-row">
+      <div class="test-title" id="testLabel">Test 1 — Part B</div>
+      <div class="timer-box" id="timerBox">
+        <div class="timer-num" id="timerDisplay">30:00</div>
+        <div class="timer-label">Remaining</div>
+      </div>
+    </div>
+    <div class="progress-bar-wrap"><div class="progress-bar" id="progressBar" style="width:0%"></div></div>
+    <div class="subj-tabs">
+      <div class="subj-tab active" id="tab0" onclick="switchSection(0)">🕌 Islamic (20)</div>
+      <div class="subj-tab" id="tab1" onclick="switchSection(1)">📖 English (5)</div>
+      <div class="subj-tab" id="tab2" onclick="switchSection(2)">🌍 GK (5)</div>
+    </div>
+  </div>
+  <div id="questionsArea"></div>
+  <div class="sticky-bottom">
+    <button class="btn btn-exit" onclick="goHome()">✕ Exit</button>
+    <div class="answered-count" id="answeredCount">0 / 30<br>answered</div>
+    <button class="btn btn-prev" id="prevBtn" onclick="handlePrev()" disabled>← Prev</button>
+    <button class="btn btn-next" id="nextBtn" onclick="handleNext()">Next →</button>
+  </div>
+</div>
+
+<!-- ===== RESULT PAGE ===== -->
+<div style="display:none;" id="resultPage">
+  <div class="site-header">
+    <h1>✦ Test Result</h1>
+    <button class="back-btn" onclick="goHome()">← All Tests</button>
+  </div>
+  <div class="result-wrap">
+    <div class="result-card">
+      <div class="result-title">Your Score</div>
+      <div class="result-score" id="finalScore">0</div>
+      <div class="result-total">out of 30</div>
+      <div class="result-msg" id="resultMsg">Keep going!</div>
+      <div class="result-breakdown">
+        <div class="rb-item"><div class="rb-num" id="rb-correct">0</div><div class="rb-label">Correct</div></div>
+        <div class="rb-item"><div class="rb-num" id="rb-wrong">0</div><div class="rb-label">Wrong</div></div>
+        <div class="rb-item"><div class="rb-num" id="rb-skip">0</div><div class="rb-label">Skipped</div></div>
+      </div>
+    </div>
+    <div class="detail-section">
+      <div class="detail-title">Subject-wise Breakdown</div>
+      <div class="detail-row">
+        <span class="detail-subj">🕌 Islamic History & Culture</span>
+        <div class="detail-nums"><span class="dn-c" id="d-isl-c">C:0</span><span class="dn-w" id="d-isl-w">W:0</span><span class="dn-s" id="d-isl-s">0/20</span></div>
+      </div>
+      <div class="detail-row">
+        <span class="detail-subj">📖 General English</span>
+        <div class="detail-nums"><span class="dn-c" id="d-eng-c">C:0</span><span class="dn-w" id="d-eng-w">W:0</span><span class="dn-s" id="d-eng-s">0/5</span></div>
+      </div>
+      <div class="detail-row">
+        <span class="detail-subj">🌍 General Knowledge</span>
+        <div class="detail-nums"><span class="dn-c" id="d-gk-c">C:0</span><span class="dn-w" id="d-gk-w">W:0</span><span class="dn-s" id="d-gk-s">0/5</span></div>
+      </div>
+      <div class="score-bar-wrap">
+        <div class="score-bar-label"><span>Score Percentage</span><span id="scorePercent">0%</span></div>
+        <div class="score-bar-bg"><div class="score-bar-fill" id="scoreBarFill" style="width:0%"></div></div>
+      </div>
+    </div>
+    <div class="detail-section">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;"><div class="detail-title" style="margin-bottom:0;">Review Answers</div><button class="btn btn-submit" style="font-size:11px;padding:7px 12px;" onclick="downloadPDF()">⬇ Download PDF</button></div>
+      <div class="review-note">Green = Correct · Red = Your wrong answer · All 4 options shown with highlights.</div>
+      <div id="reviewArea"></div>
+    </div>
+    <div class="result-btns">
+      <button class="btn btn-exit" onclick="goHome()">← All Tests</button>
+      <button class="btn btn-submit" onclick="retryTest()">Retry This Test</button>
+    </div>
+  <div style="text-align:center;padding:24px 0 8px;border-top:1px solid #ede8df;margin-top:8px;">
+    <p style="font-size:11px;color:#9a8a72;letter-spacing:0.5px;">Developed by</p>
+    <p style="font-family:'Cormorant Garamond',serif;font-size:16px;color:#7a5e1a;font-weight:600;margin-top:2px;">Md Masud Alam Sardar</p>
+    <a href="https://mmalam.in" style="font-size:10px;color:#b8923a;text-decoration:none;">mmalam.in</a>
+  </div>
+  </div>
+</div>
+
+<!-- ===== START CONFIRMATION MODAL ===== -->
+<div class="modal-overlay" id="startModal">
+  <div class="modal-box">
+    <div class="m-icon">📋</div>
+    <div class="m-title" id="modalTestTitle">Test 01</div>
+    <div class="m-sub">AUAT Part B · Test Series 2026</div>
+    <div class="m-stats">
+      <div class="ms-item"><div class="ms-n">30</div><div class="ms-l">Questions</div></div>
+      <div class="ms-item"><div class="ms-n">30</div><div class="ms-l">Marks</div></div>
+      <div class="ms-item"><div class="ms-n">30</div><div class="ms-l">Minutes</div></div>
+    </div>
+    <div class="m-rule">
+      🕌 Islamic History: 20 questions<br>
+      📖 General English: 5 questions<br>
+      🌍 General Knowledge: 5 questions<br>
+      ➖ Negative: 4 wrong = −1 mark
+    </div>
+    <div class="m-btns">
+      <button class="btn btn-exit" onclick="closeModal()">Cancel</button>
+      <button class="btn btn-submit" onclick="confirmStart()">Start Test →</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ============================================================
+// STATE
+// ============================================================
+let currentTest = null;
+let pendingTest = null;
+let userAnswers = {};
+let timerInterval = null;
+let timeLeft = 1800;
+let submitted = false;
+let currentSection = 0;
+
+const ALL_TESTS = {
+
+1: {
+  islamic: [
+    {q:"The Prophet Muhammad (ﷺ) was born in which city?", opts:["Madinah","Makkah","Taif","Jerusalem"], ans:1},
+    {q:"In which year did the Prophet (ﷺ) migrate from Makkah to Madinah (Hijrah)?", opts:["610 CE","615 CE","622 CE","630 CE"], ans:2},
+    {q:"The Quran was revealed over a period of approximately how many years?", opts:["10 years","15 years","23 years","30 years"], ans:2},
+    {q:"Who was the first Caliph of Islam after the Prophet (ﷺ)?", opts:["Umar ibn al-Khattab","Ali ibn Abi Talib","Abu Bakr al-Siddiq","Uthman ibn Affan"], ans:2},
+    {q:"The Battle of Badr took place in which year of the Islamic calendar?", opts:["1 AH","2 AH","3 AH","5 AH"], ans:1},
+    {q:"Which Surah is known as the 'Heart of the Quran'?", opts:["Surah Al-Fatiha","Surah Al-Ikhlas","Surah Ya-Sin","Surah Al-Baqarah"], ans:2},
+    {q:"How many pillars of Islam are there?", opts:["Three","Four","Five","Six"], ans:2},
+    {q:"Zakat is obligatory on Muslims who possess wealth above the:", opts:["Sadaqah","Nisab","Fidya","Kaffarah"], ans:1},
+    {q:"Which is the first month of the Islamic lunar calendar?", opts:["Ramadan","Dhul Hijjah","Muharram","Rajab"], ans:2},
+    {q:"The Battle of Uhud was fought in which year?", opts:["2 AH","3 AH","4 AH","5 AH"], ans:1},
+    {q:"Who was the second Caliph of Islam?", opts:["Ali ibn Abi Talib","Uthman ibn Affan","Umar ibn al-Khattab","Abu Bakr"], ans:2},
+    {q:"The Islamic calendar is based on which cycle?", opts:["Solar","Lunar","Both solar and lunar","Neither"], ans:1},
+    {q:"Masjid al-Haram, the holiest mosque, is in which city?", opts:["Madinah","Jerusalem","Makkah","Baghdad"], ans:2},
+    {q:"Al-Aqsa Mosque is located in which city?", opts:["Makkah","Madinah","Cairo","Jerusalem"], ans:3},
+    {q:"Laylat al-Qadr (Night of Power) falls in which month?", opts:["Shawwal","Muharram","Ramadan","Rajab"], ans:2},
+    {q:"Who was the last Prophet in Islam?", opts:["Isa (AS)","Ibrahim (AS)","Muhammad (ﷺ)","Musa (AS)"], ans:2},
+    {q:"How many times is Salah (prayer) performed daily?", opts:["Three","Four","Five","Six"], ans:2},
+    {q:"Which Caliph compiled the Quran into a single book?", opts:["Abu Bakr","Umar","Uthman","Ali"], ans:0},
+    {q:"The Islamic Golden Age is mainly associated with which dynasty?", opts:["Umayyad","Abbasid","Ottoman","Mughal"], ans:1},
+    {q:"Who built the Dome of the Rock in Jerusalem?", opts:["Caliph Umar","Caliph Abd al-Malik","Caliph Harun al-Rashid","Salahuddin Ayyubi"], ans:1},
+  ],
+  english: [
+    {q:"The study of the origin of words is called:", opts:["Phonology","Etymology","Syntax","Morphology"], ans:1},
+    {q:"Choose the correct comparative form: She is _____ than her sister.", opts:["more taller","tallest","taller","most tall"], ans:2},
+    {q:"'Once in a blue moon' means:", opts:["Very frequently","During full moon","Very rarely","Every month"], ans:2},
+    {q:"Which is NOT a type of noun?", opts:["Proper","Abstract","Collective","Comparative"], ans:3},
+    {q:"Fill in: The committee _____ reached a decision.", opts:["have","has","are","were"], ans:1},
+  ],
+  gk: [
+    {q:"The Chipko Movement in India was related to:", opts:["Water conservation","Forest conservation","Women's rights","Land rights"], ans:1},
+    {q:"Which Indian leader is associated with the Dandi March?", opts:["Jawaharlal Nehru","Bhagat Singh","Mahatma Gandhi","Subhash Chandra Bose"], ans:2},
+    {q:"The Preamble of the Indian Constitution declares India to be:", opts:["A Federal Republic","A Sovereign, Socialist, Secular, Democratic Republic","A Constitutional Monarchy","A Union of States"], ans:1},
+    {q:"Which Indian scientist is known as the 'Missile Man of India'?", opts:["C.V. Raman","Homi Bhabha","A.P.J. Abdul Kalam","Vikram Sarabhai"], ans:2},
+    {q:"The Sahara Desert is located in which continent?", opts:["Asia","Australia","South America","Africa"], ans:3},
+  ]
+},
+
+2: {
+  islamic: [
+    {q:"What does 'Islam' mean in Arabic?", opts:["Peace","Submission","Faith","Guidance"], ans:1},
+    {q:"The Quran has how many Surahs (chapters)?", opts:["100","110","114","120"], ans:2},
+    {q:"Which Prophet is known as 'Khalilullah' (Friend of Allah)?", opts:["Musa (AS)","Isa (AS)","Ibrahim (AS)","Nuh (AS)"], ans:2},
+    {q:"The Farewell Pilgrimage of the Prophet (ﷺ) was in which year?", opts:["8 AH","9 AH","10 AH","11 AH"], ans:2},
+    {q:"Which battle is known as the 'Battle of the Trench'?", opts:["Battle of Badr","Battle of Uhud","Battle of Khandaq","Battle of Hunayn"], ans:2},
+    {q:"Who was the mother of Prophet Isa (Jesus) in Islam?", opts:["Khadijah","Maryam","Asiya","Fatimah"], ans:1},
+    {q:"The Ka'bah is located in which mosque?", opts:["Masjid al-Nabawi","Masjid al-Aqsa","Masjid al-Haram","Masjid Quba"], ans:2},
+    {q:"What is the Islamic term for the pilgrimage to Makkah?", opts:["Zakat","Salah","Sawm","Hajj"], ans:3},
+    {q:"Which Companion was known as 'As-Siddiq' (The Truthful)?", opts:["Umar","Abu Bakr","Ali","Uthman"], ans:1},
+    {q:"Salahuddin Ayyubi recaptured Jerusalem in which year?", opts:["1085","1187","1250","1300"], ans:1},
+    {q:"The first mosque built in Islam was:", opts:["Masjid al-Haram","Masjid al-Nabawi","Masjid Quba","Masjid al-Aqsa"], ans:2},
+    {q:"Which is the longest Surah in the Quran?", opts:["Surah Al-Imran","Surah Al-Nisa","Surah Al-Baqarah","Surah Al-Maidah"], ans:2},
+    {q:"What does 'Sunnah' refer to in Islam?", opts:["The Quran","The practices and sayings of the Prophet (ﷺ)","Islamic law","The call to prayer"], ans:1},
+    {q:"The Mughal Empire in India was founded by:", opts:["Akbar","Humayun","Babur","Shah Jahan"], ans:2},
+    {q:"Who is considered the greatest Sufi poet of the Indian subcontinent?", opts:["Rumi","Bulleh Shah","Amir Khusro","Ibn Arabi"], ans:2},
+    {q:"The Ottoman Empire was founded in which century?", opts:["12th","13th","14th","15th"], ans:1},
+    {q:"Which Prophet built the Ka'bah according to Islamic tradition?", opts:["Muhammad (ﷺ)","Ibrahim (AS) and Ismail (AS)","Adam (AS)","Nuh (AS)"], ans:1},
+    {q:"'Tawheed' in Islam refers to:", opts:["Prayer","Fasting","The Oneness of Allah","Pilgrimage"], ans:2},
+    {q:"The Abbasid Caliphate had its capital in:", opts:["Damascus","Cairo","Baghdad","Cordoba"], ans:2},
+    {q:"Which Islamic scholar is known for the book 'Muqaddimah'?", opts:["Al-Ghazali","Ibn Khaldun","Ibn Sina","Al-Biruni"], ans:1},
+  ],
+  english: [
+    {q:"Correct passive voice of 'She writes a letter':", opts:["A letter is written by her.","A letter was written by her.","A letter will be written by her.","A letter has been written by her."], ans:0},
+    {q:"What does the idiom 'Break the ice' mean?", opts:["To cause damage","To start a conversation","To stop an activity","To make someone angry"], ans:1},
+    {q:"Choose the correct spelling:", opts:["Accomodation","Accommodation","Acommodation","Acomodation"], ans:1},
+    {q:"Identify the adjective: 'The tall man walked slowly.'", opts:["man","walked","slowly","tall"], ans:3},
+    {q:"Which sentence uses the present perfect tense correctly?", opts:["I go to school yesterday.","I have been to Paris.","I will go to market.","I am going now."], ans:1},
+  ],
+  gk: [
+    {q:"Which planet is known as the Red Planet?", opts:["Venus","Jupiter","Mars","Saturn"], ans:2},
+    {q:"The Taj Mahal was built by which Mughal Emperor?", opts:["Akbar","Humayun","Aurangzeb","Shah Jahan"], ans:3},
+    {q:"What is the chemical symbol for Gold?", opts:["Go","Gd","Au","Ag"], ans:2},
+    {q:"The Great Wall of China was primarily built to protect against invasions from:", opts:["South","East","North","West"], ans:2},
+    {q:"Who invented the telephone?", opts:["Thomas Edison","Alexander Graham Bell","Nikola Tesla","Guglielmo Marconi"], ans:1},
+  ]
+},
+
+3: {
+  islamic: [
+    {q:"What is the Arabic term for the Oneness of God in Islam?", opts:["Shirk","Tawheed","Iman","Taqwa"], ans:1},
+    {q:"Which was the first major battle in Islamic history?", opts:["Battle of Uhud","Battle of Badr","Battle of Khandaq","Battle of Hunayn"], ans:1},
+    {q:"The Prophet (ﷺ) received the first revelation in which cave?", opts:["Cave of Thawr","Cave of Hira","Cave of Uhud","Cave of Quba"], ans:1},
+    {q:"Who was the fourth Caliph of Islam?", opts:["Abu Bakr","Umar","Uthman","Ali ibn Abi Talib"], ans:3},
+    {q:"Ramadan is the _____ month of the Islamic calendar.", opts:["7th","8th","9th","10th"], ans:2},
+    {q:"What is 'Jihad' in its primary Islamic meaning?", opts:["Holy war","Struggle or striving in the way of Allah","Prayer","Fasting"], ans:1},
+    {q:"The Dome of the Rock is located in which city?", opts:["Makkah","Madinah","Cairo","Jerusalem"], ans:3},
+    {q:"Who was the first among men to embrace Islam?", opts:["Umar","Abu Bakr","Ali","Uthman"], ans:1},
+    {q:"What does 'Hijab' refer to in Islam?", opts:["A type of prayer","Modesty and covering","Fasting","Pilgrimage"], ans:1},
+    {q:"Al-Azhar University is located in which city?", opts:["Baghdad","Cairo","Makkah","Istanbul"], ans:1},
+    {q:"The Umayyad Caliphate had its capital in:", opts:["Baghdad","Cairo","Damascus","Cordoba"], ans:2},
+    {q:"Who was the wife of the Prophet (ﷺ) who first accepted Islam?", opts:["Aisha","Fatimah","Khadijah","Hafsah"], ans:2},
+    {q:"The Islamic concept of 'Shura' refers to:", opts:["Taxation","Consultation","Warfare","Trade"], ans:1},
+    {q:"Which Surah starts with 'Bismillah' twice?", opts:["Surah Al-Fatiha","Surah Al-Naml","Surah Al-Ikhlas","Surah Al-Baqarah"], ans:1},
+    {q:"Zakat requires giving what percentage of qualifying wealth?", opts:["1%","2%","2.5%","5%"], ans:2},
+    {q:"Who was the Muslim general who conquered Spain (Al-Andalus) in 711 CE?", opts:["Khalid ibn Walid","Tariq ibn Ziyad","Amr ibn al-As","Salahuddin"], ans:1},
+    {q:"The word 'Quran' in Arabic means:", opts:["The Book","The Recitation","The Guidance","The Light"], ans:1},
+    {q:"The Treaty of Hudaybiyyah was signed between:", opts:["Muslims and Christians","Muslims and Jews","Muslims and Quraysh of Makkah","Muslims and Romans"], ans:2},
+    {q:"Which Islamic dynasty ruled India for over 300 years?", opts:["Umayyad","Abbasid","Mughal","Ottoman"], ans:2},
+    {q:"Which Islamic scholar introduced the concept of 'ijtihad' prominently?", opts:["Imam Shafi'i","Imam Bukhari","Imam Nawawi","Imam Ghazali"], ans:0},
+  ],
+  english: [
+    {q:"The plural of 'ox' is:", opts:["Oxes","Oxs","Oxen","Ox"], ans:2},
+    {q:"Word closest in meaning to 'Eloquent':", opts:["Silent","Well-spoken","Confused","Angry"], ans:1},
+    {q:"Which sentence is grammatically correct?", opts:["Neither of them were present.","Neither of them was present.","Neither of they was present.","Neither of they were present."], ans:1},
+    {q:"'Omnivore' refers to an animal that:", opts:["Eats only plants","Eats only meat","Eats both plants and meat","Eats nothing"], ans:2},
+    {q:"The word 'Philanthropy' means:", opts:["Love of money","Love of humankind and charitable giving","Fear of people","Study of philosophy"], ans:1},
+  ],
+  gk: [
+    {q:"Who was the first President of India?", opts:["Jawaharlal Nehru","Rajendra Prasad","Sardar Patel","B.R. Ambedkar"], ans:1},
+    {q:"The Indian Constitution was adopted on:", opts:["15 August 1947","26 January 1950","26 November 1949","2 October 1948"], ans:2},
+    {q:"Which state in India has the largest area?", opts:["Maharashtra","Madhya Pradesh","Rajasthan","Uttar Pradesh"], ans:2},
+    {q:"The Sundarbans mangrove forest is shared between India and:", opts:["Nepal","Bangladesh","Bhutan","Sri Lanka"], ans:1},
+    {q:"Who discovered the sea route to India via the Cape of Good Hope?", opts:["Christopher Columbus","Ferdinand Magellan","Vasco da Gama","Marco Polo"], ans:2},
+  ]
+},
+
+4: {
+  islamic: [
+    {q:"'As-Salamu Alaykum' means:", opts:["Hello","Peace be upon you","Goodbye","Welcome"], ans:1},
+    {q:"How many Juz (parts) does the Quran have?", opts:["20","25","30","114"], ans:2},
+    {q:"Which Prophet is mentioned most frequently in the Quran?", opts:["Muhammad (ﷺ)","Ibrahim (AS)","Musa (AS)","Isa (AS)"], ans:2},
+    {q:"The night journey of the Prophet (ﷺ) from Makkah to Jerusalem is called:", opts:["Hijrah","Miraj","Isra","Fatah"], ans:2},
+    {q:"What is 'Sadaqah' in Islam?", opts:["Obligatory charity","Voluntary charity","Pilgrimage","Prayer"], ans:1},
+    {q:"The Battle of Yarmouk (636 CE) was fought between Muslims and:", opts:["Persians","Romans (Byzantines)","Mongols","Crusaders"], ans:1},
+    {q:"The Islamic year started from the event of:", opts:["Birth of the Prophet","First revelation","Hijrah to Madinah","Battle of Badr"], ans:2},
+    {q:"Masjid al-Nabawi (Prophet's Mosque) is located in:", opts:["Makkah","Madinah","Jerusalem","Ta'if"], ans:1},
+    {q:"The concept of 'Waqf' in Islamic law refers to:", opts:["Prayer times","Religious endowment for public benefit","Islamic marriage","Travel for Hajj"], ans:1},
+    {q:"Al-Khwarizmi is famous for:", opts:["Inventing algebra","Discovering gravity","Building the Ka'bah","Writing the Quran"], ans:0},
+    {q:"The Crusades were a series of religious wars between:", opts:["Muslims and Hindus","Christians and Muslims","Jews and Muslims","Christians and Mongols"], ans:1},
+    {q:"Which Caliph was known for strict justice and a simple lifestyle?", opts:["Abu Bakr","Umar ibn al-Khattab","Uthman","Ali"], ans:1},
+    {q:"The Great Mosque of Cordoba is located in:", opts:["Turkey","Egypt","Spain","Morocco"], ans:2},
+    {q:"Islamic law (Sharia) is derived primarily from:", opts:["Only the Quran","Quran and Sunnah","Opinions of scholars only","The Hadith only"], ans:1},
+    {q:"Ibn Sina (Avicenna) was known for:", opts:["Poetry","Medicine and philosophy","Astronomy only","Architecture"], ans:1},
+    {q:"The Sufi order founded by Khwaja Moinuddin Chishti is called:", opts:["Qadiri","Naqshbandi","Chishti","Suhrawardi"], ans:2},
+    {q:"Eid al-Adha commemorates:", opts:["End of Ramadan","Prophet's birth","Ibrahim's willingness to sacrifice his son","The Hijrah"], ans:2},
+    {q:"Which country has the largest Muslim population in the world?", opts:["Saudi Arabia","Pakistan","Bangladesh","Indonesia"], ans:3},
+    {q:"The Quran was revealed in which language?", opts:["Urdu","Persian","Arabic","Hebrew"], ans:2},
+    {q:"Who was the famous Islamic mathematician known as 'Al-Khwarizmi'?", opts:["Algebraist","Astronomer","Geographer","Chemist"], ans:0},
+  ],
+  english: [
+    {q:"What is the past tense of 'arise'?", opts:["Arised","Arose","Arosen","Ariseed"], ans:1},
+    {q:"Choose the correct sentence:", opts:["I am agree with you.","I agree with you.","I agreeing with you.","I does agree with you."], ans:1},
+    {q:"The word 'Ambiguous' means:", opts:["Clear","Having more than one meaning","False","Ancient"], ans:1},
+    {q:"Which figure of speech is used in 'The world is a stage'?", opts:["Simile","Personification","Metaphor","Alliteration"], ans:2},
+    {q:"'Loquacious' means:", opts:["Quiet","Talkative","Intelligent","Brave"], ans:1},
+  ],
+  gk: [
+    {q:"The United Nations was founded in which year?", opts:["1939","1945","1947","1950"], ans:1},
+    {q:"Mount Everest is located in which country?", opts:["India","Tibet","Nepal","Bhutan"], ans:2},
+    {q:"The largest ocean in the world is:", opts:["Atlantic","Indian","Arctic","Pacific"], ans:3},
+    {q:"Which element has the chemical symbol 'Fe'?", opts:["Fluorine","Iron","Francium","Fermium"], ans:1},
+    {q:"The Battle of Plassey (1757) was fought between the British and:", opts:["Marathas","Siraj ud-Daulah of Bengal","Hyder Ali","Tipu Sultan"], ans:1},
+  ]
+},
+
+5: {
+  islamic: [
+    {q:"The word 'Hadith' refers to:", opts:["The Quran","Sayings and actions of Prophet Muhammad (ﷺ)","Islamic law","Friday sermon"], ans:1},
+    {q:"The conquest of Makkah by Muslims occurred in which year?", opts:["5 AH","8 AH","10 AH","12 AH"], ans:1},
+    {q:"The Islamic architectural style known for geometric patterns is called:", opts:["Gothic","Baroque","Arabesque","Renaissance"], ans:2},
+    {q:"'Iqra' — the first word revealed — is in Surah:", opts:["Al-Fatiha","Al-Baqarah","Al-Alaq","Al-Ikhlas"], ans:2},
+    {q:"What is the Arabic word for 'God' used in the Quran?", opts:["Rabb","Ilah","Allah","Rahman"], ans:2},
+    {q:"Who was the Islamic scholar who wrote 'Ihya Ulum al-Din'?", opts:["Ibn Rushd","Al-Ghazali","Ibn Taymiyyah","Al-Farabi"], ans:1},
+    {q:"The term 'Ijaz' refers to:", opts:["Trade caravans","The inimitable nature of the Quran","Military campaigns","Religious taxes"], ans:1},
+    {q:"Babur, who founded the Mughal Empire, was originally from:", opts:["Persia","Arabia","Central Asia (Fergana)","Afghanistan"], ans:2},
+    {q:"The Sufi mystic Rumi was born in which country (modern name)?", opts:["Iran","Afghanistan","Turkey","Tajikistan"], ans:0},
+    {q:"Which Islamic city is known as the 'City of the Prophet'?", opts:["Makkah","Madinah","Jerusalem","Baghdad"], ans:1},
+    {q:"The term 'Ummah' in Islam refers to:", opts:["A type of prayer","The global Muslim community","Islamic law","A chapter of the Quran"], ans:1},
+    {q:"Who compiled the famous Hadith collection 'Sahih al-Bukhari'?", opts:["Imam Muslim","Imam Bukhari","Imam Malik","Imam Ahmad"], ans:1},
+    {q:"Tipu Sultan was the ruler of which kingdom in India?", opts:["Hyderabad","Bengal","Mysore","Punjab"], ans:2},
+    {q:"The Islamic art of decorative writing is called:", opts:["Miniature","Calligraphy","Mosaic","Fresco"], ans:1},
+    {q:"Which dynasty built the famous Alhambra palace in Spain?", opts:["Umayyad","Abbasid","Nasrid","Fatimid"], ans:2},
+    {q:"The Five Pillars of Islam do NOT include:", opts:["Salah","Sawm","Hajj","Jihad"], ans:3},
+    {q:"Which Islamic month is most sacred for Hajj?", opts:["Ramadan","Muharram","Dhul Hijjah","Rajab"], ans:2},
+    {q:"The Seljuk Turks were a prominent Muslim dynasty in:", opts:["Central Asia and the Middle East","West Africa","Indian subcontinent","Southeast Asia"], ans:0},
+    {q:"Who was the Prophet known as 'Dhul-Kifl' in the Quran?", opts:["Elias (AS)","Ezekiel (AS)","Enoch (AS)","Elisha (AS)"], ans:1},
+    {q:"'Taqwa' in Islam means:", opts:["Worship","God-consciousness and piety","Pilgrimage","Fasting"], ans:1},
+  ],
+  english: [
+    {q:"Choose the correct sentence:", opts:["She don't know the answer.","She doesn't know the answer.","She not knowing the answer.","She isn't know the answer."], ans:1},
+    {q:"What is the synonym of 'Benevolent'?", opts:["Cruel","Kind","Lazy","Stubborn"], ans:1},
+    {q:"Fill in the blank: He is _____ honest man.", opts:["a","an","the","no article"], ans:1},
+    {q:"Identify the noun in 'The children played happily in the park.'", opts:["played","happily","children","in"], ans:2},
+    {q:"What is the antonym of 'Ancient'?", opts:["Old","Historic","Modern","Traditional"], ans:2},
+  ],
+  gk: [
+    {q:"Who is known as the 'Father of the Nation' of India?", opts:["Jawaharlal Nehru","Bhimrao Ambedkar","Mahatma Gandhi","Subhash Chandra Bose"], ans:2},
+    {q:"Which river is the longest in India?", opts:["Yamuna","Brahmaputra","Godavari","Ganga"], ans:3},
+    {q:"In which year did India gain independence?", opts:["1945","1946","1947","1948"], ans:2},
+    {q:"The capital of India is:", opts:["Mumbai","Kolkata","Chennai","New Delhi"], ans:3},
+    {q:"Who wrote the Indian National Anthem 'Jana Gana Mana'?", opts:["Bankim Chandra Chatterjee","Rabindranath Tagore","Subramania Bharati","Sarojini Naidu"], ans:1},
+  ]
+},
+
+6: {
+  islamic: [
+    {q:"Which Prophet is known as 'Ulul Azm' (Possessor of Determination)?", opts:["Yusuf (AS)","Dawud (AS)","Muhammad (ﷺ)","Ibrahim (AS)"], ans:2},
+    {q:"The Islamic term 'Fiqh' refers to:", opts:["Islamic history","Islamic jurisprudence (law)","Quran recitation","Sufi mysticism"], ans:1},
+    {q:"In which city did the Prophet (ﷺ) build Masjid al-Nabawi?", opts:["Makkah","Taif","Madinah","Jeddah"], ans:2},
+    {q:"The Battle of Hunayn was fought in which year AH?", opts:["5 AH","7 AH","8 AH","10 AH"], ans:2},
+    {q:"How many Surahs in the Quran are named after Prophets?", opts:["5","6","7","8"], ans:1},
+    {q:"The Islamic greeting 'Assalamu Alaikum Wa Rahmatullahi Wa Barakatuh' has how many parts?", opts:["One","Two","Three","Four"], ans:2},
+    {q:"Who was the author of 'Kitab al-Shifa' (Book of Healing)?", opts:["Al-Ghazali","Ibn Sina","Al-Razi","Al-Biruni"], ans:1},
+    {q:"The term 'Masjid' means:", opts:["A school","A place of prostration","A market","A palace"], ans:1},
+    {q:"Which Companion of the Prophet (ﷺ) was known as 'Sayf Allah' (Sword of Allah)?", opts:["Umar","Khalid ibn Walid","Ali","Amr ibn al-As"], ans:1},
+    {q:"The Islamic calendar (Hijri) began in:", opts:["610 CE","622 CE","632 CE","640 CE"], ans:1},
+    {q:"Imam Abu Hanifa was the founder of which school of Islamic law?", opts:["Shafi'i","Maliki","Hanbali","Hanafi"], ans:3},
+    {q:"The Battle of Ain Jalut (1260) was fought between Mamluks and:", opts:["Crusaders","Mongols","Byzantines","Ottomans"], ans:1},
+    {q:"'Istighfar' in Islam means:", opts:["Seeking forgiveness","Giving charity","Reading the Quran","Pilgrimage"], ans:0},
+    {q:"Which city is known as 'Madinat al-Islam' (City of Islam)?", opts:["Makkah","Madinah","Baghdad","Cairo"], ans:2},
+    {q:"The Mawlid (Prophet's birthday) falls in which Islamic month?", opts:["Rajab","Sha'ban","Rabi al-Awwal","Muharram"], ans:2},
+    {q:"Who was the first Muslim to call the Adhan (call to prayer)?", opts:["Abu Bakr","Umar","Bilal ibn Rabah","Salman al-Farsi"], ans:2},
+    {q:"The word 'Halal' means:", opts:["Forbidden","Permissible","Doubtful","Compulsory"], ans:1},
+    {q:"Ibn Battuta, the famous Muslim traveler, was from:", opts:["Egypt","Morocco","Persia","Turkey"], ans:1},
+    {q:"Which Surah is known as the 'Mother of the Quran'?", opts:["Al-Baqarah","Al-Fatiha","Al-Ikhlas","Al-Kahf"], ans:1},
+    {q:"The Islamic concept of 'Ihsan' means:", opts:["Obligatory charity","Excellence and worshipping Allah as if you see Him","Islamic law","Friday prayer"], ans:1},
+  ],
+  english: [
+    {q:"'Serendipity' means:", opts:["A type of berry","Finding something good without looking for it","A type of dance","Deep sadness"], ans:1},
+    {q:"Choose the correct sentence:", opts:["Neither he nor I am wrong.","Neither he nor I are wrong.","Neither he nor I is wrong.","Neither he nor I was wrong."], ans:0},
+    {q:"The word 'Gregarious' means:", opts:["Lonely","Fond of company","Aggressive","Timid"], ans:1},
+    {q:"Which is an example of an oxymoron?", opts:["As fast as lightning","Cruel kindness","The sun rose","Birds flew"], ans:1},
+    {q:"'Ephemeral' means:", opts:["Long-lasting","Short-lived","Beautiful","Powerful"], ans:1},
+  ],
+  gk: [
+    {q:"The Brahmaputra river originates in:", opts:["India","Nepal","Tibet (China)","Bhutan"], ans:2},
+    {q:"Who was the architect of the Indian Constitution?", opts:["Jawaharlal Nehru","Mahatma Gandhi","B.R. Ambedkar","Sardar Patel"], ans:2},
+    {q:"The Nobel Peace Prize is awarded in which city?", opts:["Stockholm","Oslo","Geneva","Copenhagen"], ans:1},
+    {q:"Silicon Valley is located in which U.S. state?", opts:["New York","Texas","California","Florida"], ans:2},
+    {q:"The Coriolis effect is caused by:", opts:["Moon's gravity","Earth's rotation","Sun's gravity","Ocean currents"], ans:1},
+  ]
+},
+
+7: {
+  islamic: [
+    {q:"What is 'Isnad' in Hadith terminology?", opts:["The text of the Hadith","The chain of narrators","The authentication level","The topic of Hadith"], ans:1},
+    {q:"The Prophet (ﷺ) was born in the Year of the Elephant. Which animal attacked Makkah that year?", opts:["Horse","Camel","Elephant","Lion"], ans:2},
+    {q:"Which Prophet is associated with the story of the whale in the Quran?", opts:["Musa (AS)","Yunus (AS)","Isa (AS)","Sulaiman (AS)"], ans:1},
+    {q:"The Islamic term 'Bida' refers to:", opts:["Good innovation","Forbidden innovation in religion","A type of prayer","Fasting on Mondays"], ans:1},
+    {q:"Who was the first martyr (shahid) in Islam?", opts:["Hamza ibn Abd al-Muttalib","Bilal ibn Rabah","Sumayyah bint Khayyat","Yasir ibn Amir"], ans:2},
+    {q:"Imam Malik's famous book of Hadith is called:", opts:["Sahih al-Bukhari","Al-Muwatta","Sunan Abu Dawud","Sahih Muslim"], ans:1},
+    {q:"The Madinah Charter (Sahifat al-Madinah) is considered one of the first:", opts:["Trade agreements","Constitutions in history","Military alliances","Religious treaties"], ans:1},
+    {q:"Which Islamic dynasty was known for the 'House of Wisdom' (Bayt al-Hikmah)?", opts:["Umayyad","Abbasid","Ottoman","Fatimid"], ans:1},
+    {q:"'Riba' in Islam refers to:", opts:["Charity","Usury (interest)","Trade profit","Inheritance"], ans:1},
+    {q:"Which Surah is recommended to be read every Friday?", opts:["Surah Ya-Sin","Surah Al-Mulk","Surah Al-Kahf","Surah Al-Ikhlas"], ans:2},
+    {q:"The Prophet (ﷺ) passed away in which year CE?", opts:["610 CE","622 CE","629 CE","632 CE"], ans:3},
+    {q:"Imam al-Shafi'i was born in which city?", opts:["Baghdad","Madinah","Gaza","Cairo"], ans:2},
+    {q:"Which Prophet is mentioned in the Quran as being raised to the heavens alive?", opts:["Ibrahim (AS)","Musa (AS)","Isa (AS)","Idris (AS)"], ans:2},
+    {q:"The term 'Dhikr' in Islam refers to:", opts:["Prayer times","Remembrance of Allah","Islamic fasting","Pilgrimage rites"], ans:1},
+    {q:"The Ottoman Caliphate was abolished in which year?", opts:["1919","1922","1924","1928"], ans:2},
+    {q:"Which Muslim scientist invented the first camera obscura?", opts:["Ibn Sina","Al-Kindi","Ibn al-Haytham","Al-Biruni"], ans:2},
+    {q:"The term 'Fatwa' refers to:", opts:["A type of prayer","A legal ruling or opinion in Islamic law","A Sufi ceremony","An Islamic tax"], ans:1},
+    {q:"Which Surah speaks about the story of Prophet Yusuf (Joseph)?", opts:["Surah Maryam","Surah Yusuf","Surah Ibrahim","Surah Hud"], ans:1},
+    {q:"'Salat al-Janazah' is the Islamic:", opts:["Wedding prayer","Funeral prayer","Eid prayer","Night prayer"], ans:1},
+    {q:"The Islamic philosopher known as 'The First Teacher' (al-Muallim al-Awwal) was:", opts:["Ibn Rushd","Al-Farabi","Ibn Sina","Al-Ghazali"], ans:1},
+  ],
+  english: [
+    {q:"'Cacophony' means:", opts:["Pleasant sound","Harsh or discordant sound","Complete silence","A type of music"], ans:1},
+    {q:"The word 'Ubiquitous' means:", opts:["Rare","Found everywhere","Very large","Very old"], ans:1},
+    {q:"Choose the correct sentence:", opts:["Each of the students have submitted their work.","Each of the students has submitted their work.","Each of the students is submitted their work.","Each of the students submitted his and her work."], ans:1},
+    {q:"'Ameliorate' means:", opts:["To worsen","To improve","To ignore","To question"], ans:1},
+    {q:"Which of these is a conjunction?", opts:["Beautiful","Quickly","Although","Carefully"], ans:2},
+  ],
+  gk: [
+    {q:"The Kyoto Protocol is related to:", opts:["Nuclear weapons","Climate change","Ocean pollution","Deforestation"], ans:1},
+    {q:"Who was the first woman to win a Nobel Prize?", opts:["Mother Teresa","Marie Curie","Malala Yousafzai","Dorothy Hodgkin"], ans:1},
+    {q:"The Strait of Hormuz connects the Persian Gulf to:", opts:["Red Sea","Arabian Sea","Indian Ocean","Mediterranean Sea"], ans:1},
+    {q:"Which is the smallest country in the world by area?", opts:["Monaco","San Marino","Liechtenstein","Vatican City"], ans:3},
+    {q:"The headquarters of the International Monetary Fund (IMF) is in:", opts:["New York","London","Paris","Washington D.C."], ans:3},
+  ]
+},
+
+8: {
+  islamic: [
+    {q:"How many Prophets are mentioned by name in the Quran?", opts:["20","25","28","30"], ans:1},
+    {q:"The Islamic concept of 'Tawakkul' means:", opts:["Prayer","Trust and reliance on Allah","Pilgrimage","Fasting"], ans:1},
+    {q:"Which battle is known as 'Ghazwat al-Ahzab' (Battle of the Confederates)?", opts:["Battle of Badr","Battle of Uhud","Battle of Khandaq","Battle of Hunayn"], ans:2},
+    {q:"Who was the Prophet (ﷺ)'s grandfather who raised him?", opts:["Abu Lahab","Abu Talib","Abd al-Muttalib","Waraqa ibn Nawfal"], ans:2},
+    {q:"The Quran mentions how many names/attributes of Allah?", opts:["33","69","99","100"], ans:2},
+    {q:"'Tayammum' in Islam is:", opts:["A type of fasting","Dry ablution using sand/earth","Night prayer","A type of Hajj"], ans:1},
+    {q:"The Fatimid Caliphate was founded in:", opts:["Egypt and North Africa","Arabia","Persia","Turkey"], ans:0},
+    {q:"Which Prophet is known as 'Kalimullah' (one who spoke to Allah directly)?", opts:["Ibrahim (AS)","Isa (AS)","Muhammad (ﷺ)","Musa (AS)"], ans:3},
+    {q:"The first Hijri year corresponds to approximately which CE year?", opts:["610 CE","617 CE","622 CE","630 CE"], ans:2},
+    {q:"'Khutbah' refers to:", opts:["Islamic tax","A sermon (especially Friday sermon)","Prayer beads","The call to prayer"], ans:1},
+    {q:"Which Muslim mathematician introduced the concept of zero to Europe?", opts:["Ibn Sina","Al-Kindi","Al-Khwarizmi","Al-Biruni"], ans:2},
+    {q:"The Battle of Manzikert (1071) was between Seljuk Turks and:", opts:["Crusaders","Mongols","Byzantine Empire","Persian Sassanids"], ans:2},
+    {q:"'Wudu' (ablution) is required before which act of worship?", opts:["Giving charity","Salah (prayer)","Fasting","Hajj only"], ans:1},
+    {q:"Which Islamic scholar is known as 'Sheikh al-Islam'?", opts:["Al-Ghazali","Ibn Taymiyyah","Ibn Sina","Imam Shafi'i"], ans:1},
+    {q:"The Islamic Finance principle that prohibits interest is based on the prohibition of:", opts:["Zakat","Riba","Sadaqah","Waqf"], ans:1},
+    {q:"Which dynasty ruled Egypt after Salahuddin Ayyubi?", opts:["Fatimid","Ayyubid","Mamluk","Ottoman"], ans:2},
+    {q:"The term 'Halaqah' in Islamic tradition refers to:", opts:["A circular knife","A study circle","A type of prayer","Pilgrimage route"], ans:1},
+    {q:"'Du'a' in Islam means:", opts:["Prostration","Supplication (personal prayer to Allah)","Fasting","Pilgrimage"], ans:1},
+    {q:"The city of Timbuktu was a major center of Islamic learning in:", opts:["East Africa","North Africa","West Africa","Central Africa"], ans:2},
+    {q:"Which Islamic scholar classified knowledge as 'Fard Ayn' (individual obligation) and 'Fard Kifayah' (collective obligation)?", opts:["Ibn Rushd","Al-Ghazali","Ibn Khaldun","Al-Shafi'i"], ans:1},
+  ],
+  english: [
+    {q:"'Verbose' means:", opts:["Brief and concise","Using more words than needed","Very intelligent","Extremely quiet"], ans:1},
+    {q:"Choose the correct form: 'If I _____ rich, I would help the poor.'", opts:["am","was","were","will be"], ans:2},
+    {q:"The word 'Zeitgeist' means:", opts:["A German warrior","The spirit or mood of a particular time","A type of ghost","An old tradition"], ans:1},
+    {q:"Which rhetorical device repeats the same consonant sound at the beginning of words?", opts:["Assonance","Alliteration","Anaphora","Antithesis"], ans:1},
+    {q:"'Magnanimous' means:", opts:["Very angry","Generous in forgiving","Very small","Highly intelligent"], ans:1},
+  ],
+  gk: [
+    {q:"Which country is the world's largest producer of rice?", opts:["India","Bangladesh","Thailand","China"], ans:3},
+    {q:"The Ozone layer is found in which part of the atmosphere?", opts:["Troposphere","Stratosphere","Mesosphere","Thermosphere"], ans:1},
+    {q:"Who wrote 'The Discovery of India'?", opts:["Mahatma Gandhi","Jawaharlal Nehru","Rabindranath Tagore","Subhash Chandra Bose"], ans:1},
+    {q:"The Tropic of Cancer passes through which Indian state?", opts:["Rajasthan","Gujarat","Madhya Pradesh","All of these"], ans:3},
+    {q:"Which organ of the human body produces insulin?", opts:["Liver","Kidney","Pancreas","Stomach"], ans:2},
+  ]
+},
+
+9: {
+  islamic: [
+    {q:"The Islamic term 'Ahl al-Kitab' refers to:", opts:["Muslim scholars","People of the Book (Jews, Christians)","Islamic judges","Quran reciters"], ans:1},
+    {q:"Which was the last revealed Surah of the Quran?", opts:["Surah Al-Fatiha","Surah Al-Nasr","Surah Al-Ikhlas","Surah Al-Maidah"], ans:3},
+    {q:"The Prophet (ﷺ) had how many wives in total?", opts:["9","11","13","15"], ans:1},
+    {q:"The Islamic term 'Ijma' refers to:", opts:["Individual opinion","Scholarly consensus","Analogy","Revelation"], ans:1},
+    {q:"Who was the Governor of Egypt appointed by Umar ibn al-Khattab?", opts:["Khalid ibn Walid","Amr ibn al-As","Abu Ubaydah","Muawiyah"], ans:1},
+    {q:"The concept of 'Naskh' (abrogation) in Quran refers to:", opts:["Repetition of verses","Later revelation canceling earlier rulings","Translation of Quran","Interpretation of Quran"], ans:1},
+    {q:"The Ghaznavid dynasty was founded by:", opts:["Mahmud of Ghazni","Sebuktigin","Alp Arslan","Timur"], ans:1},
+    {q:"In which country is the Topkapi Palace museum located?", opts:["Egypt","Saudi Arabia","Turkey","Iran"], ans:2},
+    {q:"'Sawm' (fasting) in Ramadan becomes obligatory at which stage of life?", opts:["At birth","At age 7","At puberty (baligh)","At age 18"], ans:2},
+    {q:"The Islamic term 'Qiyas' (analogy) is used in:", opts:["Quran recitation","Islamic jurisprudence","Hadith classification","Sufi practices"], ans:1},
+    {q:"Who was the first person to be buried in Jannat al-Baqi (Madinah's cemetery)?", opts:["Khadijah (RA)","Uthman ibn Mazun","Hamza ibn Abd al-Muttalib","Fatimah (RA)"], ans:1},
+    {q:"The Moors — Muslims in Spain — were expelled from Spain in:", opts:["1389","1492","1542","1600"], ans:1},
+    {q:"'Surah Al-Kahf' speaks about which number of sleepers (Ashaab al-Kahf)?", opts:["3","5","7 (or more)","9"], ans:2},
+    {q:"Who was the Islamic scholar who standardized Arabic grammar?", opts:["Al-Khalil ibn Ahmad","Sibawayhi","Al-Asmai","Abu Amr ibn al-Ala"], ans:1},
+    {q:"The Mamluks originally were:", opts:["Free Arab warriors","Enslaved soldiers who rose to power","Persian nobles","Turkish tribesmen"], ans:1},
+    {q:"'Janazah' refers to:", opts:["Islamic wedding","Funeral rites in Islam","Eid celebration","Charity meal"], ans:1},
+    {q:"Which Islamic city was known as the 'City of Peace' (Madinat al-Salam)?", opts:["Makkah","Madinah","Baghdad","Cairo"], ans:2},
+    {q:"The word 'Minaret' comes from the Arabic word 'Manara' meaning:", opts:["Dome","Lighthouse/tower","Garden","Courtyard"], ans:1},
+    {q:"Imam Ahmad ibn Hanbal is known for his massive Hadith collection called:", opts:["Al-Muwatta","Musnad Ahmad","Sahih al-Bukhari","Sunan al-Nasa'i"], ans:1},
+    {q:"The Islamic scholar Al-Tabari is known for his work in:", opts:["Medicine","Tafsir (Quran commentary) and history","Mathematics","Astronomy"], ans:1},
+  ],
+  english: [
+    {q:"'Paradox' is a statement that:", opts:["Is always true","Seems contradictory but may be true","Is always false","Is very complex"], ans:1},
+    {q:"Choose the correct sentence:", opts:["Everyone have their own opinion.","Everyone has their own opinion.","Everyone has his own opinion.","Everyone are having their opinions."], ans:1},
+    {q:"The word 'Recalcitrant' means:", opts:["Obedient","Stubbornly resistant","Very intelligent","Generous"], ans:1},
+    {q:"Which of these is a preposition?", opts:["Run","Quickly","Beautiful","Between"], ans:3},
+    {q:"'Pragmatic' means:", opts:["Idealistic","Dealing with things in a practical way","Very emotional","Deeply philosophical"], ans:1},
+  ],
+  gk: [
+    {q:"The Suez Canal connects which two bodies of water?", opts:["Red Sea and Arabian Sea","Mediterranean Sea and Red Sea","Black Sea and Mediterranean Sea","Persian Gulf and Red Sea"], ans:1},
+    {q:"Who was the first Indian to go to space?", opts:["Kalpana Chawla","Sunita Williams","Rakesh Sharma","Ravish Malhotra"], ans:2},
+    {q:"The 'Green Revolution' in India was associated with:", opts:["Afforestation","High-yielding crop varieties","Solar energy","Water conservation"], ans:1},
+    {q:"Which country gifted the Statue of Liberty to the United States?", opts:["England","France","Germany","Spain"], ans:1},
+    {q:"The International Day of Peace is observed on:", opts:["October 24","September 21","January 1","March 22"], ans:1},
+  ]
+},
+
+10: {
+  islamic: [
+    {q:"Which of the four Rightly-Guided Caliphs ruled for the longest period?", opts:["Abu Bakr","Umar","Uthman","Ali"], ans:2},
+    {q:"The term 'Dawah' in Islam means:", opts:["Night prayer","Invitation to Islam / Islamic outreach","Fasting on Mondays","Pilgrimage to Makkah"], ans:1},
+    {q:"Al-Andalus (Muslim Spain) was established in which century CE?", opts:["5th","6th","8th","10th"], ans:2},
+    {q:"Which Prophet built a ship to save his people from the flood?", opts:["Ibrahim (AS)","Musa (AS)","Nuh (AS)","Yunus (AS)"], ans:2},
+    {q:"The Islamic scholar who reconciled reason and faith in his work 'Incoherence of the Incoherence' was:", opts:["Al-Ghazali","Ibn Rushd (Averroes)","Ibn Sina","Al-Farabi"], ans:1},
+    {q:"'Salat al-Tahajjud' is performed:", opts:["At dawn","At midday","In the last third of the night","At sunset"], ans:2},
+    {q:"The term 'Gharar' in Islamic finance means:", opts:["Interest","Excessive uncertainty/speculation","Charity","Partnership"], ans:1},
+    {q:"Who was the Prophet Sulaiman (Solomon) known for in Islamic tradition?", opts:["His patience","His wisdom and control over jinn and animals","His military conquests","His scripture"], ans:1},
+    {q:"The Deoband school of Islamic thought was founded in which country?", opts:["Pakistan","Saudi Arabia","India","Bangladesh"], ans:2},
+    {q:"Which caliph is credited with standardizing the Quran's written form into one dialect?", opts:["Abu Bakr","Umar","Uthman","Ali"], ans:2},
+    {q:"The concept of 'Silsila' in Sufism refers to:", opts:["Prayer beads","A chain of spiritual masters","A type of poetry","A religious ceremony"], ans:1},
+    {q:"Ibn Khaldun's sociological concept of group solidarity is called:", opts:["Tawakkul","Asabiyyah","Ummah","Ijma"], ans:1},
+    {q:"The Kaaba is draped in a black cloth called:", opts:["Ihram","Kiswa","Hijaab","Thobe"], ans:1},
+    {q:"The Islamic scholar Al-Razi (Rhazes) was a pioneer in:", opts:["Mathematics","Medicine and chemistry","Astronomy","Architecture"], ans:1},
+    {q:"Which battle marked the end of the Byzantine-Sassanid Wars, paving way for Muslim conquests?", opts:["Battle of Yarmouk","Battle of Qadisiyya","Battle of Nineveh","Battle of Nahavand"], ans:2},
+    {q:"The term 'Wali' in Islamic context can refer to:", opts:["An enemy","A guardian or Islamic saint","A judge","A scholar only"], ans:1},
+    {q:"The 'Night Journey' (Isra) took the Prophet (ﷺ) from Makkah to:", opts:["Madinah","Jerusalem (Al-Aqsa)","Heaven directly","Taif"], ans:1},
+    {q:"The Islamic prohibition on eating pork is stated in:", opts:["Hadith only","The Quran","Scholarly consensus only","Sufi traditions"], ans:1},
+    {q:"The Zaydi Shia Imamate historically ruled in which region?", opts:["Iraq","Iran","Yemen","Bahrain"], ans:2},
+    {q:"'Qurbani' (sacrifice) during Eid al-Adha commemorates the sacrifice of Prophet:", opts:["Muhammad (ﷺ)","Ibrahim (AS)","Musa (AS)","Dawud (AS)"], ans:1},
+  ],
+  english: [
+    {q:"'Equivocal' means:", opts:["Clear and certain","Having two or more possible meanings","Very equal","Completely wrong"], ans:1},
+    {q:"Choose the correct sentence:", opts:["The data shows a clear trend.","The data show a clear trend.","The data is showing a clear trend.","The data are showing a clear trend."], ans:1},
+    {q:"'Laconic' means:", opts:["Very talkative","Using very few words","Very loud","Very slow"], ans:1},
+    {q:"Which of these sentences uses a dangling modifier?", opts:["Running fast, John won the race.","Running fast, the race was won.","John, running fast, won the race.","John ran fast and won the race."], ans:1},
+    {q:"'Mendacious' means:", opts:["Truthful","Lying or untruthful","Very kind","Very proud"], ans:1},
+  ],
+  gk: [
+    {q:"The Palk Strait separates India from:", opts:["Maldives","Bangladesh","Sri Lanka","Myanmar"], ans:2},
+    {q:"Which gas is most abundant in the Earth's atmosphere?", opts:["Oxygen","Carbon dioxide","Argon","Nitrogen"], ans:3},
+    {q:"The Battle of Panipat (1526) was fought between Babur and:", opts:["Rana Sanga","Ibrahim Lodi","Hemu","Sher Shah Suri"], ans:1},
+    {q:"The 'Silicon Valley' of India is called:", opts:["Mumbai","Hyderabad","Bengaluru","Pune"], ans:2},
+    {q:"Which country has the most UNESCO World Heritage Sites?", opts:["China","France","Italy","Spain"], ans:2},
+  ]
+},
+
+11: {
+  islamic: [
+    {q:"The Prophet (ﷺ)'s migration to Madinah is called the:", opts:["Isra","Miraj","Hijrah","Ghazwa"], ans:2},
+    {q:"Which Islamic month is called the month of fasting?", opts:["Muharram","Safar","Ramadan","Shawwal"], ans:2},
+    {q:"The Quran was first compiled in book form under which Caliph?", opts:["Umar","Abu Bakr","Uthman","Ali"], ans:1},
+    {q:"The first Surah revealed to the Prophet (ﷺ) was:", opts:["Surah Al-Fatiha","Surah Al-Alaq","Surah Al-Baqarah","Surah Al-Ikhlas"], ans:1},
+    {q:"'Asr' prayer is offered at which time of day?", opts:["Dawn","Noon","Afternoon","Sunset"], ans:2},
+    {q:"The Islamic empire that defeated the Crusaders at Hattin (1187) was led by:", opts:["Nur al-Din Zengi","Salahuddin Ayyubi","Baibars","Qutuz"], ans:1},
+    {q:"The Mughal Emperor known for religious tolerance was:", opts:["Babur","Humayun","Akbar","Aurangzeb"], ans:2},
+    {q:"Which of the five pillars involves a declaration of faith?", opts:["Salah","Sawm","Shahada","Zakat"], ans:2},
+    {q:"The term 'Tafsir' refers to:", opts:["Islamic poetry","Exegesis/interpretation of the Quran","Islamic finance","Sufi meditation"], ans:1},
+    {q:"The Islamic philosopher who influenced European scholasticism the most was:", opts:["Al-Ghazali","Ibn Sina","Ibn Rushd (Averroes)","Al-Farabi"], ans:2},
+    {q:"Which Surah is known as the 'Shield of the Quran'?", opts:["Surah Al-Baqarah","Surah Ya-Sin","Surah Al-Falaq","Surah Al-Ikhlas"], ans:3},
+    {q:"The four schools (Madhabs) of Sunni Islamic law are:", opts:["Hanafi, Maliki, Shafi'i, Hanbali","Hanafi, Ja'fari, Shafi'i, Hanbali","Sunni, Shia, Sufi, Salafi","Hanafi, Maliki, Ismaili, Hanbali"], ans:0},
+    {q:"'Ramadan' in Arabic is derived from a root word meaning:", opts:["Peace","Scorching heat","Blessing","Prayer"], ans:1},
+    {q:"The first Hijri calendar month is Muharram. Which day of Muharram is considered especially sacred?", opts:["1st","5th","10th (Ashura)","15th"], ans:2},
+    {q:"The Treaty of Medina was essentially a document of:", opts:["War declaration","Coexistence between Muslims and Jews/tribes","Trade agreement","Military alliance against Rome"], ans:1},
+    {q:"Islamic architecture's 'Mashrabiya' refers to:", opts:["A type of minaret","A latticed screen window","A prayer niche","A decorative dome"], ans:1},
+    {q:"Which Muslim explorer is credited with circumnavigating Africa before Europeans?", opts:["Ibn Battuta","Ahmad ibn Majid","Zheng He","Al-Idrisi"], ans:1},
+    {q:"The famous mosque 'Djinguereber' is located in:", opts:["Cairo, Egypt","Timbuktu, Mali","Cordoba, Spain","Fez, Morocco"], ans:1},
+    {q:"The Islamic month of Dhul Hijjah is significant for:", opts:["Fasting","Hajj (pilgrimage)","Giving extra Zakat","Reading the Quran in full"], ans:1},
+    {q:"Which of these was NOT a contribution of Islamic scholars to the world?", opts:["Algebra","Invention of the printing press","Advances in optics","Development of hospitals"], ans:1},
+  ],
+  english: [
+    {q:"'Abstruse' means:", opts:["Clear and simple","Difficult to understand","Very beautiful","Very common"], ans:1},
+    {q:"The correct plural of 'phenomenon' is:", opts:["Phenomenons","Phenomenas","Phenomena","Phenomeni"], ans:2},
+    {q:"Choose the correct form: 'She _____ to the market before it closed.'", opts:["goes","gone","had gone","has go"], ans:2},
+    {q:"'Sycophant' means:", opts:["A type of fruit","A person who flatters to gain favor","A medical instrument","A philosophical concept"], ans:1},
+    {q:"Which of these is an example of an understatement?", opts:["The ocean is a bit wet.","He is as brave as a lion.","The thunder roared angrily.","She has a mountain of work."], ans:0},
+  ],
+  gk: [
+    {q:"India's first satellite was named:", opts:["Bhaskara","Aryabhata","Rohini","INSAT"], ans:1},
+    {q:"The Strait of Gibraltar connects the Atlantic Ocean to the:", opts:["Red Sea","Black Sea","Mediterranean Sea","Indian Ocean"], ans:2},
+    {q:"Which is the longest written constitution in the world?", opts:["USA","UK","India","China"], ans:2},
+    {q:"The 'Ring of Fire' is associated with:", opts:["Volcanic and seismic activity","A geological fault in Africa","Deserts around the equator","Ocean currents"], ans:0},
+    {q:"'Operation Flood' in India was related to:", opts:["Irrigation","Flood control","White Revolution (milk production)","Fishing"], ans:2},
+  ]
+},
+
+12: {
+  islamic: [
+    {q:"The Prophet (ﷺ)'s father was:", opts:["Abdul Muttalib","Abu Talib","Abdullah","Abdul Uzza"], ans:2},
+    {q:"Which Islamic scholar wrote 'Kitab al-Umm', the main text of the Shafi'i school?", opts:["Imam Malik","Imam Abu Hanifa","Imam al-Shafi'i","Imam Ahmad"], ans:2},
+    {q:"The 'Basmala' (Bismillah ir-Rahman ir-Rahim) appears at the start of how many Surahs?", opts:["112","113","114","115"], ans:1},
+    {q:"The Islamic concept of 'Shura' (consultation) is mentioned in which Surah?", opts:["Surah Al-Baqarah","Surah Al-Imran","Surah Al-Shura","Surah Al-Nisa"], ans:2},
+    {q:"Which of these is NOT one of the six major Hadith collections (Kutub al-Sittah)?", opts:["Sahih al-Bukhari","Sahih Muslim","Muwatta Imam Malik","Tafsir al-Tabari"], ans:3},
+    {q:"The Islamic architectural element 'Mihrab' is:", opts:["A minaret","A prayer niche indicating the direction of Makkah","A courtyard fountain","A dome"], ans:1},
+    {q:"Which Prophet is associated with 'Zabur' (Psalms) in Islam?", opts:["Musa (AS)","Dawud (AS)","Isa (AS)","Ibrahim (AS)"], ans:1},
+    {q:"The term 'Musharakah' in Islamic finance means:", opts:["Interest-based loan","Partnership / profit and loss sharing","Leasing agreement","Charitable donation"], ans:1},
+    {q:"The 'Pledge of Aqabah' was an agreement between the Prophet (ﷺ) and people from:", opts:["Makkah","Taif","Madinah (Yathrib)","Yemen"], ans:2},
+    {q:"Imam al-Nawawi's famous collection of 40 Hadiths is known as:", opts:["Al-Muwatta","Arbain al-Nawawiyya","Sahih al-Muslim","Riyad al-Salihin"], ans:1},
+    {q:"The Ottoman Sultan who captured Constantinople (1453) was:", opts:["Suleiman the Magnificent","Selim I","Mehmed II","Bayezid I"], ans:2},
+    {q:"'Ijtihad' refers to:", opts:["Consensus of scholars","Independent reasoning to derive Islamic rulings","Following a previous scholar","Abrogation of Quranic verses"], ans:1},
+    {q:"The famous 'Mansa Musa' was the ruler of which Islamic empire in Africa?", opts:["Songhai","Ghana","Mali","Kanem-Bornu"], ans:2},
+    {q:"Which Islamic dynasty first ruled India from Delhi?", opts:["Mughal","Slave (Mamluk) Dynasty","Khalji","Tughlaq"], ans:1},
+    {q:"The Islamic month immediately after Ramadan is:", opts:["Dhul Qa'dah","Shawwal","Dhul Hijjah","Rajab"], ans:1},
+    {q:"Al-Idrisi, the medieval Islamic geographer, produced a famous world map for:", opts:["Caliph Harun al-Rashid","Roger II of Sicily","Salahuddin Ayyubi","Suleiman the Magnificent"], ans:1},
+    {q:"'Shirk' in Islam means:", opts:["Complete faith","Associating partners with Allah (polytheism)","Charitable giving","Pilgrimage"], ans:1},
+    {q:"The Khawarij were an early Islamic sect known for:", opts:["Sufi mysticism","Extreme views and rebellion","Theological rationalism","Support of Ali (RA)"], ans:1},
+    {q:"Which Islamic scholar systematized Sufi thought in 'Kashf al-Mahjub'?", opts:["Rumi","Al-Ghazali","Ali Hujwiri (Data Ganj Bakhsh)","Ibn Arabi"], ans:2},
+    {q:"The Prophet (ﷺ)'s first wife was:", opts:["Aisha","Hafsah","Khadijah","Zaynab"], ans:2},
+  ],
+  english: [
+    {q:"'Esoteric' means:", opts:["Common knowledge","Intended for a small group of people with special knowledge","Very beautiful","Very loud"], ans:1},
+    {q:"Choose the correct sentence:", opts:["The bouquet of flowers are beautiful.","The bouquet of flowers is beautiful.","The bouquet of flowers were beautiful.","The bouquet of flowers have been beautiful."], ans:1},
+    {q:"'Obsequious' means:", opts:["Proud and arrogant","Excessively obedient and flattering","Very intelligent","Deeply religious"], ans:1},
+    {q:"Which is an example of hyperbole?", opts:["The wind whispered.","I've told you a million times.","She has a heart of gold.","Life is a journey."], ans:1},
+    {q:"'Panacea' means:", opts:["A type of disease","A solution for all problems","A rare flower","A musical instrument"], ans:1},
+  ],
+  gk: [
+    {q:"The Indian Space Research Organisation (ISRO) was founded in:", opts:["1959","1962","1969","1972"], ans:2},
+    {q:"Which country has the world's longest coastline?", opts:["Australia","Russia","USA","Canada"], ans:3},
+    {q:"The term 'Photosynthesis' involves plants producing food using:", opts:["Water only","Sunlight, water, and CO₂","Oxygen and minerals","Soil nutrients only"], ans:1},
+    {q:"The headquarters of the World Health Organization (WHO) is in:", opts:["New York","London","Geneva","Brussels"], ans:2},
+    {q:"Who was the first Prime Minister of India?", opts:["Mahatma Gandhi","Jawaharlal Nehru","Lal Bahadur Shastri","Sardar Patel"], ans:1},
+  ]
+},
+
+13: {
+  islamic: [
+    {q:"The Prophet (ﷺ)'s mother was:", opts:["Khadijah","Aminah bint Wahb","Halimah al-Sa'diyyah","Fatimah bint Asad"], ans:1},
+    {q:"Which Surah was revealed in its entirety at once?", opts:["Surah Al-Baqarah","Surah Al-Fatiha","Surah Al-Kahf","Surah Al-Ikhlas"], ans:1},
+    {q:"The practice of 'Sunnah' prayers before and after obligatory prayers is called:", opts:["Nafl","Rawatib","Tahajjud","Witr"], ans:1},
+    {q:"The 'Ridda Wars' (Wars of Apostasy) were fought during whose Caliphate?", opts:["Umar's","Abu Bakr's","Uthman's","Ali's"], ans:1},
+    {q:"The Islamic term 'Akhirah' refers to:", opts:["This world","The Hereafter (afterlife)","Paradise specifically","Judgment Day"], ans:1},
+    {q:"Which Islamic scholar is known for classifying Hadiths into 'Sahih', 'Hasan', and 'Da'if'?", opts:["Imam Bukhari","Ibn Hajar al-Asqalani","Al-Tirmidhi","Ibn al-Salah"], ans:3},
+    {q:"The Zanj Rebellion (869–883 CE) was a major revolt by enslaved Africans in:", opts:["Egypt","Iraq (Abbasid Empire)","Spain","Morocco"], ans:1},
+    {q:"'Salat al-Witr' is how many rak'ahs at minimum?", opts:["One","Two","Three","Four"], ans:0},
+    {q:"The Islamic principle that 'necessity permits what is forbidden' is known as:", opts:["Ijtihad","Darurah (necessity)","Istihsan","Maslaha"], ans:1},
+    {q:"Which famous Islamic traveler wrote 'Rihla' (The Journey)?", opts:["Al-Idrisi","Al-Masudi","Ibn Battuta","Ibn Jubayr"], ans:2},
+    {q:"The Mughal Emperor who built the Taj Mahal was:", opts:["Akbar","Jahangir","Shah Jahan","Aurangzeb"], ans:2},
+    {q:"'Tasbih' in Islamic practice refers to:", opts:["Pilgrimage","Saying 'SubhanAllah' (Glory be to Allah)","Night prayer","Charitable giving"], ans:1},
+    {q:"The 'Sunni-Shia' split in Islam began after the death of the Prophet (ﷺ) primarily over:", opts:["Prayer methods","Leadership succession (who should lead the Muslim community)","The Quran's text","Fasting practices"], ans:1},
+    {q:"Which Islamic empire had its capital at Samarkand and Herat?", opts:["Mongol Ilkhanate","Timurid Empire","Safavid Empire","Seljuk Empire"], ans:1},
+    {q:"The Quran refers to itself as 'Dhikr' meaning:", opts:["Law","Reminder/Remembrance","History","Prophecy"], ans:1},
+    {q:"Which Prophet is associated with the 'Torah' (Tawrat) in Islam?", opts:["Ibrahim (AS)","Isa (AS)","Musa (AS)","Dawud (AS)"], ans:2},
+    {q:"The Islamic concept of 'Maqasid al-Shariah' refers to:", opts:["Prayer times","The objectives/goals of Islamic law","A book of Hadith","Sufi orders"], ans:1},
+    {q:"Al-Khwarizmi's book on algebra was titled:", opts:["Kitab al-Shifa","Al-Kitab al-Mukhtasar fi Hisab al-Jabr","Muqaddimah","Ihya Ulum al-Din"], ans:1},
+    {q:"The term 'Fard' in Islamic jurisprudence means:", opts:["Recommended","Obligatory","Permissible","Forbidden"], ans:1},
+    {q:"The Quranic verse Ayat al-Kursi is in which Surah?", opts:["Surah Al-Imran","Surah Al-Baqarah","Surah Al-Nisa","Surah Al-Maidah"], ans:1},
+  ],
+  english: [
+    {q:"'Perfidious' means:", opts:["Extremely loyal","Deceitful and untrustworthy","Highly intelligent","Very generous"], ans:1},
+    {q:"Choose the correct sentence:", opts:["Its raining outside.","It's raining outside.","Its' raining outside.","It raining outside."], ans:1},
+    {q:"'Soliloquy' in drama refers to:", opts:["A conversation between two characters","A character speaking their thoughts aloud alone","A play within a play","The final scene"], ans:1},
+    {q:"The word 'Ubiquitous' is closest in meaning to:", opts:["Rare","Everywhere","Beautiful","Outdated"], ans:1},
+    {q:"Choose the correct word: 'The _____ of the group made the decision.'", opts:["majority","most","plurality","number"], ans:0},
+  ],
+  gk: [
+    {q:"The River Nile flows through how many countries?", opts:["7","9","11","13"], ans:2},
+    {q:"Which is the hardest natural substance on Earth?", opts:["Gold","Iron","Diamond","Platinum"], ans:2},
+    {q:"The term 'Photon' refers to:", opts:["A type of neutron","A particle of light","A unit of electricity","A type of proton"], ans:1},
+    {q:"Who was the first human to walk on the moon?", opts:["Buzz Aldrin","Yuri Gagarin","Neil Armstrong","Alan Shepard"], ans:2},
+    {q:"The Indian city of Kolkata was formerly known as:", opts:["Bombay","Madras","Calcutta","Benares"], ans:2},
+  ]
+},
+
+14: {
+  islamic: [
+    {q:"How many Ayahs (verses) does the Quran have in total?", opts:["5,000","6,236","6,666","7,000"], ans:1},
+    {q:"The Prophet (ﷺ) received the first revelation at approximately what age?", opts:["30","35","40","45"], ans:2},
+    {q:"'Istikharah' prayer is performed when:", opts:["Entering a mosque","Making an important decision","Breaking the fast","Before sleeping only"], ans:1},
+    {q:"The Islamic term 'Kafir' refers to:", opts:["A sinner","One who disbelieves in Allah","A hypocrite","A non-Arab Muslim"], ans:1},
+    {q:"Which Islamic scholar compiled 'Al-Jami al-Sahih' (Sahih al-Tirmidhi)?", opts:["Imam Bukhari","Imam Muslim","Imam al-Tirmidhi","Imam al-Nasa'i"], ans:2},
+    {q:"The 'Hegirian calendar' is another name for the:", opts:["Gregorian Calendar","Persian Solar Calendar","Islamic Hijri Calendar","Julian Calendar"], ans:2},
+    {q:"Which Ottoman Sultan is known as 'Suleiman the Magnificent'?", opts:["Mehmed II","Selim I","Suleiman I","Bayezid II"], ans:2},
+    {q:"'Muezzin' is the person who:", opts:["Leads prayers","Gives the call to prayer (Adhan)","Teaches Islamic law","Manages the mosque"], ans:1},
+    {q:"The term 'Ghayb' in the Quran refers to:", opts:["Visible world","The unseen/hidden (known only to Allah)","Islamic law","Paradise"], ans:1},
+    {q:"The 'Abbasid Revolution' (750 CE) overthrew which dynasty?", opts:["Fatimid","Umayyad","Ayyubid","Buyid"], ans:1},
+    {q:"Which Islamic juristic principle means 'public interest'?", opts:["Ijtihad","Maslaha Mursala","Istihsan","Qiyas"], ans:1},
+    {q:"The Prophet Dawud (David) is associated with which holy book?", opts:["Torah (Tawrat)","Zabur (Psalms)","Injil (Gospel)","Sahifa"], ans:1},
+    {q:"'Fajr' prayer is offered:", opts:["At midday","Before sunrise (dawn)","After sunset","At night"], ans:1},
+    {q:"Which Companion of the Prophet (ﷺ) is known for his expertise in Hadith narration?", opts:["Umar ibn al-Khattab","Abu Hurayrah","Ali ibn Abi Talib","Uthman ibn Affan"], ans:1},
+    {q:"The Fatimid Caliphate followed which branch of Islam?", opts:["Sunni","Ismaili Shia","Zaydi Shia","Ibadi"], ans:1},
+    {q:"Which Surah is called 'Qalb al-Quran' (Heart of the Quran)?", opts:["Al-Fatiha","Al-Baqarah","Ya-Sin","Al-Ikhlas"], ans:2},
+    {q:"The Islamic term 'Munafiq' refers to:", opts:["A non-Muslim","A hypocrite","A new Muslim","A pious person"], ans:1},
+    {q:"Which Muslim mathematician first described the solution of quadratic equations?", opts:["Al-Biruni","Al-Khwarizmi","Ibn al-Haytham","Al-Kindi"], ans:1},
+    {q:"The term 'Salaf' in Islamic tradition refers to:", opts:["Modern Muslims","The pious predecessors (first three generations of Muslims)","Sufi masters","Islamic judges"], ans:1},
+    {q:"Masjid al-Quba holds the distinction of being:", opts:["The largest mosque in the world","The first mosque built in Islam","The mosque in Makkah","The mosque at Al-Aqsa"], ans:1},
+  ],
+  english: [
+    {q:"'Inveterate' means:", opts:["New and fresh","Having a habit firmly established over a long time","Easily changed","Very rare"], ans:1},
+    {q:"Choose the correct sentence:", opts:["Less people came than expected.","Fewer people came than expected.","Lesser people came than expected.","More less people came than expected."], ans:1},
+    {q:"'Irony' is a literary device where:", opts:["Events happen as expected","The intended meaning is opposite to the literal meaning","Characters speak very loudly","The plot ends sadly"], ans:1},
+    {q:"The word 'Fiduciary' relates to:", opts:["Musical harmony","Trust and responsibility to act in another's best interest","A type of crime","Political loyalty"], ans:1},
+    {q:"'Enervate' means:", opts:["To energize","To weaken","To anger","To confuse"], ans:1},
+  ],
+  gk: [
+    {q:"The 'Big Bang Theory' explains the origin of:", opts:["Black holes","The Universe","The solar system only","Earth"], ans:1},
+    {q:"The River Amazon is located in which continent?", opts:["Africa","Asia","South America","North America"], ans:2},
+    {q:"Which country is the largest by total area?", opts:["USA","China","Canada","Russia"], ans:3},
+    {q:"DNA stands for:", opts:["Dioxyribonucleic Acid","Deoxyribonucleic Acid","Diribonucleic Acid","Dioxyribose Nucleic Acid"], ans:1},
+    {q:"The headquarters of the World Trade Organization (WTO) is in:", opts:["New York","Brussels","Geneva","Vienna"], ans:2},
+  ]
+},
+
+15: {
+  islamic: [
+    {q:"The Prophet (ﷺ) is described as 'Rahmatan lil Alamin' meaning:", opts:["Leader of the Arabs","Mercy to all the worlds","King of the believers","Light of Makkah"], ans:1},
+    {q:"Which Surah contains the story of Prophet Ibrahim (AS) and the fire?", opts:["Surah Al-Anbiya","Surah Maryam","Surah Yusuf","Surah Al-Kahf"], ans:0},
+    {q:"The Islamic term 'Iqamah' refers to:", opts:["The Adhan","The second call to prayer (immediately before prayer starts)","A type of Sufi prayer","Friday sermon"], ans:1},
+    {q:"The 'Four Imams' of Sunni fiqh lived during the:", opts:["1st century AH","2nd–3rd century AH","4th–5th century AH","6th century AH"], ans:1},
+    {q:"Which Companion was known as 'Asad Allah' (Lion of Allah)?", opts:["Umar ibn al-Khattab","Khalid ibn Walid","Ali ibn Abi Talib","Hamza ibn Abd al-Muttalib"], ans:3},
+    {q:"The Islamic concept of 'Mizan' (balance/scale) relates to:", opts:["Daily prayer","Judgment Day","Charity","Pilgrimage rites"], ans:1},
+    {q:"'Sirat al-Mustaqim' (The Straight Path) is mentioned in which Surah?", opts:["Surah Al-Baqarah","Surah Al-Fatiha","Surah Al-Imran","Surah Al-Ikhlas"], ans:1},
+    {q:"Which city did the Crusaders capture in 1099 CE?", opts:["Makkah","Damascus","Cairo","Jerusalem"], ans:3},
+    {q:"The Quran verse 'Inna lillahi wa inna ilayhi raji'un' is recited when:", opts:["Beginning a meal","Hearing news of death","Waking up","Beginning prayer"], ans:1},
+    {q:"The Islamic financial instrument 'Murabaha' refers to:", opts:["Interest-free loan","Cost-plus financing (selling at disclosed profit)","A type of partnership","Charitable endowment"], ans:1},
+    {q:"Salahuddin Ayyubi belonged to which ethnicity?", opts:["Arab","Malay","Kurdish","Turkish"], ans:2},
+    {q:"'Sunan' in Hadith terminology refers to:", opts:["Fabricated Hadiths","Collections of Hadiths organized by topic (Prophetic traditions)","Scholarly opinions","Quran commentary"], ans:1},
+    {q:"The 'Dome of the Rock' was built in which year CE?", opts:["638 CE","661 CE","691 CE","750 CE"], ans:2},
+    {q:"Which Islamic empire controlled Makkah and Madinah for the longest period in history?", opts:["Abbasid","Umayyad","Ottoman","Fatimid"], ans:2},
+    {q:"The term 'Niyyah' in Islam means:", opts:["Pilgrimage","Intention (before acts of worship)","Prayer","Charity"], ans:1},
+    {q:"Which Prophet's story is told in the most detail in the Quran?", opts:["Musa (AS)","Ibrahim (AS)","Yusuf (AS)","Muhammad (ﷺ)"], ans:2},
+    {q:"The 'Asharites' and 'Maturidites' are schools of Islamic:", opts:["Jurisprudence (fiqh)","Theology (aqeedah/kalam)","Hadith classification","Sufi practice"], ans:1},
+    {q:"Which Islamic scholar is considered the 'Reviver' (Mujaddid) of the 12th century AH?", opts:["Al-Ghazali","Ahmad ibn Idris","Shah Waliullah Dehlawi","Ahmad Sirhindi"], ans:2},
+    {q:"The Quran warns most strongly against which sin?", opts:["Theft","Shirk (associating partners with Allah)","Lying","Backbiting"], ans:1},
+    {q:"Which of these is a pillar of Hajj?", opts:["Staying at Mina","Wuquf at Arafat","Throwing stones at Jamarat","Tawaf al-Qudum"], ans:1},
+  ],
+  english: [
+    {q:"'Perspicacious' means:", opts:["Difficult to understand","Having a ready insight into things","Very talkative","Easily confused"], ans:1},
+    {q:"Choose the correct sentence:", opts:["Between you and I, this is wrong.","Between you and me, this is wrong.","Between you and myself, this is wrong.","Between I and you, this is wrong."], ans:1},
+    {q:"'Hubris' refers to:", opts:["Great humility","Excessive pride or arrogance","Extreme bravery","Deep sadness"], ans:1},
+    {q:"Which of these sentences contains a split infinitive?", opts:["To boldly go where no one has gone before.","To go boldly where no one has gone before.","Boldly going where no one has gone before.","Going boldly where no one has gone."], ans:0},
+    {q:"'Verisimilitude' means:", opts:["The quality of being very similar","The appearance of being true or real","A logical contradiction","A literary allusion"], ans:1},
+  ],
+  gk: [
+    {q:"The 'Black Hole' theory was primarily developed by:", opts:["Albert Einstein","Stephen Hawking","Isaac Newton","Niels Bohr"], ans:1},
+    {q:"Which is the most spoken language in the world by number of native speakers?", opts:["English","Spanish","Hindi","Mandarin Chinese"], ans:3},
+    {q:"The Universal Declaration of Human Rights was adopted in:", opts:["1945","1946","1947","1948"], ans:3},
+    {q:"Which country has won the most FIFA World Cups?", opts:["Germany","Argentina","Italy","Brazil"], ans:3},
+    {q:"The human body has how many chromosomes (in a normal cell)?", opts:["23","44","46","48"], ans:2},
+  ]
+}
+
+};
+
+// ============================================================
+// GRID
+// ============================================================
+function buildGrid() {
+  const grid = document.getElementById('testGrid');
+  for (let i = 1; i <= 15; i++) {
+    const card = document.createElement('div');
+    card.className = 'test-card';
+    card.onclick = () => openModal(i);
+    card.innerHTML = `
+      <div class="tc-num">${String(i).padStart(2,'0')}</div>
+      <div class="tc-label">Test Series</div>
+      <div class="tc-marks">30 Questions · 30 Marks</div>
+      <span class="tc-badge">Start →</span>`;
+    grid.appendChild(card);
+  }
+}
+
+// ============================================================
+// MODAL
+// ============================================================
+function openModal(num) {
+  pendingTest = num;
+  document.getElementById('modalTestTitle').textContent = 'Test ' + String(num).padStart(2,'0');
+  document.getElementById('startModal').classList.add('open');
+}
+function closeModal() {
+  document.getElementById('startModal').classList.remove('open');
+  pendingTest = null;
+}
+function confirmStart() {
+  const testNum = pendingTest;
+  closeModal();
+  startTest(testNum);
+}
+
+// ============================================================
+// NAVIGATION
+// ============================================================
+function goHome() {
+  clearInterval(timerInterval);
+  document.getElementById('homePage').style.display = 'block';
+  document.getElementById('testPage').style.display = 'none';
+  document.getElementById('resultPage').style.display = 'none';
+  currentTest = null; userAnswers = {}; submitted = false; currentSection = 0;
+  window.scrollTo(0,0);
+}
+
+function startTest(num) {
+  if (!ALL_TESTS[num]) { alert('Coming soon!'); return; }
+  currentTest = num; userAnswers = {}; submitted = false;
+  timeLeft = 1800; currentSection = 0;
+  document.getElementById('homePage').style.display = 'none';
+  document.getElementById('testPage').style.display = 'block';
+  document.getElementById('resultPage').style.display = 'none';
+  document.getElementById('testLabel').textContent = 'Test ' + num + ' — Part B';
+  renderQuestions();
+  switchSection(0);
+  startTimer();
+}
+
+function retryTest() { startTest(currentTest); }
+
+// ============================================================
+// SECTION SWITCH (tabs clickable + prev/next)
+// ============================================================
+function switchSection(idx) {
+  currentSection = idx;
+  document.querySelectorAll('.q-section').forEach((s, i) => s.classList.toggle('active', i === idx));
+  document.querySelectorAll('.subj-tab').forEach((t, i) => t.classList.toggle('active', i === idx));
+  // Prev button
+  const prev = document.getElementById('prevBtn');
+  prev.disabled = (idx === 0);
+  // Next button label
+  const next = document.getElementById('nextBtn');
+  if (idx === 2) {
+    next.textContent = 'Submit →';
+    next.className = 'btn btn-submit';
+  } else {
+    next.textContent = 'Next →';
+    next.className = 'btn btn-next';
+  }
+  window.scrollTo(0, 0);
+}
+
+function handlePrev() {
+  if (currentSection > 0) switchSection(currentSection - 1);
+}
+function handleNext() {
+  if (currentSection < 2) switchSection(currentSection + 1);
+  else submitTest();
+}
+
+// ============================================================
+// RENDER QUESTIONS
+// ============================================================
+function renderQuestions() {
+  const data = ALL_TESTS[currentTest];
+  const area = document.getElementById('questionsArea');
+  area.innerHTML = '';
+  const sections = [
+    {key:'islamic', label:'Islamic History & Culture', marks:20},
+    {key:'english', label:'General English', marks:5},
+    {key:'gk', label:'General Knowledge', marks:5},
+  ];
+  let gIdx = 0;
+  sections.forEach((sec, si) => {
+    const div = document.createElement('div');
+    div.className = 'q-section' + (si===0?' active':'');
+    div.id = 'sec'+si;
+    let html = `<div class="questions-wrap">
+      <div class="section-header">
+        <div class="section-name">${sec.label}</div>
+        <div class="section-marks">${sec.marks} Marks · ${data[sec.key].length} Questions</div>
+      </div>`;
+    data[sec.key].forEach((q) => {
+      const idx = gIdx;
+      html += `<div class="q-card" id="qcard-${idx}">
+        <div class="q-num">Question ${idx+1}</div>
+        <div class="q-text">${q.q}</div>
+        <div class="options">`;
+      ['A','B','C','D'].forEach((lt, oi) => {
+        html += `<div class="option" id="opt-${idx}-${oi}" onclick="selectAnswer(${idx},${oi})">
+          <div class="opt-letter">${lt}</div><span>${q.opts[oi]}</span></div>`;
+      });
+      html += `</div></div>`;
+      gIdx++;
+    });
+    html += '</div>';
+    div.innerHTML = html;
+    area.appendChild(div);
+  });
+  updateProgress();
+}
+
+function selectAnswer(qIdx, optIdx) {
+  if (submitted) return;
+  userAnswers[qIdx] = optIdx;
+  document.getElementById('qcard-'+qIdx).classList.add('answered');
+  for (let i=0;i<4;i++) {
+    const o = document.getElementById('opt-'+qIdx+'-'+i);
+    if(o) o.classList.remove('selected');
+  }
+  const s = document.getElementById('opt-'+qIdx+'-'+optIdx);
+  if(s) s.classList.add('selected');
+  updateProgress();
+}
+
+function updateProgress() {
+  const data = ALL_TESTS[currentTest];
+  const total = data.islamic.length + data.english.length + data.gk.length;
+  const answered = Object.keys(userAnswers).length;
+  document.getElementById('progressBar').style.width = (answered/total*100)+'%';
+  document.getElementById('answeredCount').textContent = answered+' / '+total+'\nanswered';
+  const sizes = [data.islamic.length, data.english.length, data.gk.length];
+  let off = 0;
+  sizes.forEach((sz, si) => {
+    let done = 0;
+    for(let i=off;i<off+sz;i++) if(userAnswers[i]!==undefined) done++;
+    const tab = document.getElementById('tab'+si);
+    done===sz ? tab.classList.add('done') : tab.classList.remove('done');
+    off+=sz;
+  });
+}
+
+// ============================================================
+// TIMER
+// ============================================================
+function startTimer() {
+  clearInterval(timerInterval);
+  timerInterval = setInterval(() => {
+    timeLeft--;
+    const m = Math.floor(timeLeft/60), s = timeLeft%60;
+    document.getElementById('timerDisplay').textContent = String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
+    const box = document.getElementById('timerBox');
+    timeLeft<=300 ? box.classList.add('warning') : box.classList.remove('warning');
+    if(timeLeft<=0){clearInterval(timerInterval);submitTest();}
+  },1000);
+}
+
+// ============================================================
+// SUBMIT
+// ============================================================
+function submitTest() {
+  if(submitted) return;
+  submitted = true;
+  clearInterval(timerInterval);
+  const data = ALL_TESTS[currentTest];
+  const allQ = [...data.islamic,...data.english,...data.gk];
+  const sizes = [data.islamic.length,data.english.length,data.gk.length];
+  let totalC=0, totalW=0;
+  const stats=[{c:0,w:0},{c:0,w:0},{c:0,w:0}];
+  let off=0;
+  sizes.forEach((sz,si)=>{
+    for(let i=off;i<off+sz;i++){
+      const ua=userAnswers[i];
+      if(ua===undefined){}
+      else if(ua===allQ[i].ans){totalC++;stats[si].c++;}
+      else{totalW++;stats[si].w++;}
+    }
+    off+=sz;
+  });
+  const neg=Math.floor(totalW/4);
+  const score=Math.max(0,totalC-neg);
+  const skipped=allQ.length-totalC-totalW;
+  showResult(score,totalC,totalW,skipped,stats,allQ);
+}
+
+function showResult(score,correct,wrong,skipped,stats,allQ) {
+  document.getElementById('testPage').style.display='none';
+  document.getElementById('resultPage').style.display='block';
+  document.getElementById('finalScore').textContent=score;
+  document.getElementById('rb-correct').textContent=correct;
+  document.getElementById('rb-wrong').textContent=wrong;
+  document.getElementById('rb-skip').textContent=skipped;
+  const pct=Math.round((score/30)*100);
+  document.getElementById('scorePercent').textContent=pct+'%';
+  setTimeout(()=>{document.getElementById('scoreBarFill').style.width=pct+'%';},300);
+  const msgs=['Do not give up. Try again!','Keep going. More practice needed.','Good effort. Keep practicing!','Great work! You are on track.','Excellent! Outstanding performance!'];
+  document.getElementById('resultMsg').textContent=score>=25?msgs[4]:score>=20?msgs[3]:score>=15?msgs[2]:score>=10?msgs[1]:msgs[0];
+  const ids=['isl','eng','gk'], maxM=[20,5,5];
+  ids.forEach((id,i)=>{
+    const s=stats[i], neg=Math.floor(s.w/4), sc=Math.max(0,s.c-neg);
+    document.getElementById('d-'+id+'-c').textContent='C:'+s.c;
+    document.getElementById('d-'+id+'-w').textContent='W:'+s.w;
+    document.getElementById('d-'+id+'-s').textContent=sc+'/'+maxM[i];
+  });
+  buildReview(allQ);
+  window.scrollTo(0,0);
+}
+
+function buildReview(allQ) {
+  const area=document.getElementById('reviewArea');
+  area.innerHTML='';
+  const L=['A','B','C','D'];
+  allQ.forEach((q,i)=>{
+    const ua=userAnswers[i];
+    const isC=ua===q.ans, isS=ua===undefined;
+    const div=document.createElement('div');
+    div.style.cssText='margin-bottom:18px;padding-bottom:18px;border-bottom:1px solid #ede8df;';
+    const badge=isS
+      ?'<span style="background:#f0f0f0;color:#888;font-size:9px;padding:2px 8px;border-radius:10px;font-weight:700;flex-shrink:0;">SKIPPED</span>'
+      :isC?'<span style="background:#e8f2ec;color:#2d6e4a;font-size:9px;padding:2px 8px;border-radius:10px;font-weight:700;flex-shrink:0;">✓ CORRECT</span>'
+      :'<span style="background:#faeaea;color:#8b2e2e;font-size:9px;padding:2px 8px;border-radius:10px;font-weight:700;flex-shrink:0;">✗ WRONG</span>';
+    // Build all 4 options
+    let optsHtml='<div style="display:flex;flex-direction:column;gap:6px;margin-top:10px;">';
+    q.opts.forEach((opt,oi)=>{
+      let bg='#f9f7f4';let border='#ede8df';let lBg='#e8e0d4';let lColor='#4a3e2e';let bold='normal';
+      if(oi===q.ans){bg='#e8f2ec';border='#2d6e4a';lBg='#2d6e4a';lColor='white';bold='bold';}
+      else if(!isS&&oi===ua&&!isC){bg='#faeaea';border='#8b2e2e';lBg='#8b2e2e';lColor='white';}
+      optsHtml+=`<div style="display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:8px;border:1.5px solid ${border};background:${bg};font-size:12px;font-weight:${bold};color:#18140e;">
+        <span style="width:20px;height:20px;border-radius:50%;background:${lBg};color:${lColor};display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:bold;flex-shrink:0;">${L[oi]}</span>
+        ${opt}</div>`;
+    });
+    optsHtml+='</div>';
+    div.innerHTML=`<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:4px;">
+      <div style="font-size:13px;font-weight:600;color:#18140e;line-height:1.5;">${i+1}. ${q.q}</div>${badge}</div>${optsHtml}`;
+    area.appendChild(div);
+  });
+}
+
+
+window.onload = function(){ buildGrid(); };
+
+// ============================================================
+// PDF DOWNLOAD
+// ============================================================
+function downloadPDF() {
+  const data = ALL_TESTS[currentTest];
+  const allQ = [...data.islamic, ...data.english, ...data.gk];
+  const L = ['A','B','C','D'];
+  const secNames = ['Islamic History & Culture (20 Questions)','General English (5 Questions)','General Knowledge (5 Questions)'];
+  const secSizes = [data.islamic.length, data.english.length, data.gk.length];
+
+  let html = `<!DOCTYPE html><html><head><meta charset="UTF-8">
+  <style>
+    body{font-family:Georgia,serif;max-width:800px;margin:0 auto;padding:30px;color:#18140e;}
+    h1{font-size:22px;text-align:center;color:#7a5e1a;border-bottom:2px solid #b8923a;padding-bottom:10px;}
+    h2{font-size:14px;color:#7a5e1a;margin:24px 0 12px;text-transform:uppercase;letter-spacing:1px;}
+    .q-block{margin-bottom:18px;padding:14px;border:1px solid #ede8df;border-radius:8px;page-break-inside:avoid;}
+    .q-text{font-size:13px;font-weight:bold;margin-bottom:10px;line-height:1.5;}
+    .opt{font-size:12px;padding:5px 10px;margin:3px 0;border-radius:5px;display:flex;align-items:center;gap:8px;}
+    .opt-letter{width:20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:bold;flex-shrink:0;}
+    .correct{background:#e8f2ec;border:1px solid #2d6e4a;}
+    .correct .opt-letter{background:#2d6e4a;color:white;}
+    .wrong{background:#faeaea;border:1px solid #8b2e2e;}
+    .wrong .opt-letter{background:#8b2e2e;color:white;}
+    .normal{background:#f9f7f4;border:1px solid #ede8df;}
+    .normal .opt-letter{background:#e8e0d4;color:#4a3e2e;}
+    .skipped{background:#fffbe6;border:1px solid #e8c84a;}
+    .status{display:inline-block;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:bold;margin-left:8px;}
+    .s-correct{background:#e8f2ec;color:#2d6e4a;}
+    .s-wrong{background:#faeaea;color:#8b2e2e;}
+    .s-skip{background:#f0f0f0;color:#888;}
+    .header-meta{text-align:center;font-size:12px;color:#9a8a72;margin-bottom:24px;}
+    .score-summary{background:#18140e;color:white;border-radius:12px;padding:20px;text-align:center;margin-bottom:24px;}
+    .ss-score{font-size:48px;color:#b8923a;font-weight:bold;}
+    .ss-label{font-size:12px;color:rgba(255,255,255,0.5);margin-top:4px;}
+  </style></head><body>
+  <h1>AUAT Test Series 2026 — Part B</h1>
+  <div class="header-meta">Test ${currentTest} &nbsp;·&nbsp; Answer Review</div>`;
+
+  // Score summary
+  const total=allQ.length;
+  let correct=0,wrong=0;
+  allQ.forEach((q,i)=>{
+    const ua=userAnswers[i];
+    if(ua===q.ans) correct++;
+    else if(ua!==undefined) wrong++;
+  });
+  const neg=Math.floor(wrong/4);
+  const score=Math.max(0,correct-neg);
+  html+=`<div class="score-summary">
+    <div class="ss-score">${score}/30</div>
+    <div class="ss-label">Correct: ${correct} &nbsp;·&nbsp; Wrong: ${wrong} &nbsp;·&nbsp; Skipped: ${total-correct-wrong} &nbsp;·&nbsp; Negative: −${neg}</div>
+  </div>`;
+
+  let qIdx=0;
+  secSizes.forEach((size,si)=>{
+    html+=`<h2>${secNames[si]}</h2>`;
+    for(let i=qIdx;i<qIdx+size;i++){
+      const q=allQ[i];
+      const ua=userAnswers[i];
+      const isC=ua===q.ans, isS=ua===undefined;
+      const statusLabel=isS?'SKIPPED':isC?'✓ CORRECT':'✗ WRONG';
+      const statusClass=isS?'s-skip':isC?'s-correct':'s-wrong';
+      html+=`<div class="q-block">
+        <div class="q-text">${i+1}. ${q.q} <span class="status ${statusClass}">${statusLabel}</span></div>`;
+      q.opts.forEach((opt,oi)=>{
+        let cls='normal';
+        if(oi===q.ans) cls='correct';
+        else if(!isS && oi===ua && !isC) cls='wrong';
+        html+=`<div class="opt ${cls}"><span class="opt-letter">${L[oi]}</span>${opt}</div>`;
+      });
+      html+=`</div>`;
+    }
+    qIdx+=size;
+  });
+
+  html+=`<div style="text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid #ede8df;">
+    <p style="font-size:11px;color:#9a8a72;">Developed by</p>
+    <p style="font-family:Georgia,serif;font-size:15px;color:#7a5e1a;font-weight:bold;margin-top:2px;">Md Masud Alam Sardar</p>
+    <p style="font-size:10px;color:#b8923a;">mmalam.in</p>
+  </div>
+</body></html>`;
+
+  const blob=new Blob([html],{type:'text/html'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url; a.download=`AUAT_Test${currentTest}_Review`;
+  a.click(); URL.revokeObjectURL(url);
+}
+</script>
+</body>
+</html>
